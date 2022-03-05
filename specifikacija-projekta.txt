@@ -1,14 +1,21 @@
 Opsta specifikacija za projekat iz RMS
 
-Imacu klasu korisnik koja ce mi vise predstavljati sam uredjaj nego korisnika. Korisnik ce imati korisnicko ime, lozinku i email. Samo jedan korisnik (uredjaj je dozvoljen). Korisnike mogu da cuvam recimo na api-ju. Ovo cuvam cisto zbog neke simulacije placanja, ni za sta drugo mi nije potrebno. Dakle na pocetku korisniku nudimo da se uloguje sa postojecim nalogom ili da napravi novi.
+Imacu klasu korisnik koja ce mi vise predstavljati sam uredjaj nego korisnika. Korisnik ce imati korisnicko ime, lozinku i email. 
+Samo jedan korisnik (uredjaj je dozvoljen). Korisnike mogu da cuvam recimo na api-ju. Ovo cuvam cisto zbog neke simulacije placanja,
+ni za sta drugo mi nije potrebno. Dakle na pocetku korisniku nudimo da se uloguje sa postojecim nalogom ili da napravi novi.
 
 Simulaciju placanja bih resio sa nekim globalin atributom, platio ful verziju aplikacije == true. 
-Takodje bih se ogranicio da korisnik moze da prevari aplikaciju i da obrise neki sat i da doda novi, sa nekim globalnim atributom dodat prvi sat == true. 
-Simulacija placanja bi bila neka funkcija u korisniku koja bi popunila atribut platio ful verziju. To bi se prikazalo ispod liste satova gde bi stajalo uporozerenje nemate ful verziju aplikacije i dugme kupite ful verziju. Kada se klikne na dugme samo bih obavestio da je kupljena ful verzija i to je to, jer je samo poenta da simuliram tako nesto
+Takodje bih se ogranicio da korisnik moze da prevari aplikaciju i da obrise neki sat i da doda novi, sa nekim globalnim atributom 
+dodat prvi sat == true. 
+ako je dodat prvi sat i nije platio verziju aplikacije, uklanjamo mu opcije za brisanje i izmenu tog sata
+Simulacija placanja bi bila neka funkcija u korisniku koja bi popunila atribut platio ful verziju. To bi se prikazalo ispod liste 
+satova gde bi stajalo uporozerenje nemate ful verziju aplikacije i dugme kupite ful verziju. Kada se klikne na dugme samo bih obavestio 
+da je kupljena ful verzija i to je to, jer je samo poenta da simuliram tako nesto
 
-Ako je platio ful verziju app onda mu dozvolimo da ima vise satova, a ako nije platio onda mu prikazujemo jedan sat (ako ga ima) i sakrijemo dugme za dodavanje novog sata
+Ako je platio ful verziju app onda mu dozvolimo da ima vise satova, a ako nije platio onda mu prikazujemo jedan sat (ako ga ima) i 
+sakrijemo dugme za dodavanje novog sata
 
-u lok. bazi mogu da cuvam same objekte satova a checkpointe takodje u bazu ali poseno, spajacu ih preko id-ja sata.
+u lok. bazi mogu da cuvam same objekte satova a checkpointe takodje u bazu ali posebno, spajacu ih preko id-ja sata.
 
 sat ima marku, model i listu checkpointa (sat i checkpoint se spajaju preko id-ja sata kao atribut u checkpointu)
 
@@ -18,7 +25,8 @@ to bih resio preko konstruktora koji prima samo trenutno vreme (prvo cekirano) i
 
 onda bih checkpointe cuvao u bazi gde bih imao id sata, pocetno vreme, i onda bih samo menjao dalje polja u bazi kada se doda drugi checkpoint 
 
-pocetni checkpint treba da sadrzi vreme kada je cekiran, vreme koje je bilo na satu, a drugi checkpoint, opis i koliko iznose odstupanja izmedju ta dva checkpointa:
+pocetni checkpint treba da sadrzi vreme kada je cekiran, vreme koje je bilo na satu, a drugi checkpoint, opis i koliko iznose odstupanja 
+izmedju ta dva checkpointa:
 
 formula bi bila otprilike:
 -1.vreme check - 2. vreme check (od toga dobijamo ukupno vreme koje je bilo izmedju checkpointa)
@@ -28,13 +36,15 @@ formula bi bila otprilike:
  ova dva izmerena odstupanja oduzmemo drugi od prvog i dobijemo koliko je odstupanje za vreme koje je bilo izmedju checkpointa.
 
 *treba prikazati vreme koje je proslo izmedju checkpointa i koliko je odstupanje
-*treba zabraniti da se drugi check odradi ako je proslo manje od 8 sati (priakzati neko obavestenje da je min 8 sati potrebno da bi se izmerilo odstupanje)
+*treba zabraniti da se drugi check odradi ako je proslo manje od 8 sati (priakzati neko obavestenje da je min 8 sati 
+potrebno da bi se izmerilo odstupanje)
 
 znaci svaki check objekat bi morao da ima 1. vreme check, 2. vreme check, 1. vreme na satu, 2. vreme na satu, opis i konacno odstupanje
 Objekti se prave zasebno, ne bih da implementiram da je 2. check jednog objekta 1. check novog check objekta
 Znaci kako odradi ceo checkpoint objekat onda mu nudim dugme + da doda drugi checkpoint ako zeli.
 Dodati dole fiksan natpis da mora proci min 8 sati izmedju 1. i 2. checkpointa (ogranicenje u kodu, takodje)
-U help dodati objasnjenje da sat treba proveriti u vise stanja da bi se dobio realan rezultat. Da je sat u razlicitim polozajima, da se nosi, da je skroz navijen i da nije skroz navijen
+U help dodati objasnjenje da sat treba proveriti u vise stanja da bi se dobio realan rezultat. Da je sat u razlicitim polozajima, 
+da se nosi, da je skroz navijen i da nije skroz navijen
 
 omoguciti koriscenja senzora kamere da moze da se uslika sat kada se dodaje novi
 ..........................................

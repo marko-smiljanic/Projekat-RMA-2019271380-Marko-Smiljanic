@@ -13,8 +13,7 @@ public class MainActivity extends AppCompatActivity {
         ///////////////////////////////////////
 
 
-
-
+        //stao sam kod kreiranja custom api-ja za korisnike i kreiranja view modela
 
     }
 
