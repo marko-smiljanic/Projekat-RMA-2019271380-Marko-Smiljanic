@@ -1,0 +1,28 @@
+[
+    {
+        "korisnicko_ime": "korisnik1",
+        "lozinka": "lozinka1",
+        "email": "email1",
+        "platio_ful_verziju": "false"
+    },
+    {
+        "korisnicko_ime": "korisnik2",
+        "lozinka": "lozinka2",
+        "email": "email2",
+        "platio_ful_verziju": "false"
+    },
+    {
+        "korisnicko_ime": "korisnik3",
+        "lozinka": "lozinka3",
+        "email": "email3",
+        "platio_ful_verziju": "false"
+    },
+    {
+        "korisnicko_ime": "korisnik4",
+        "lozinka": "lozinka4",
+        "email": "email4",
+        "platio_ful_verziju": "false"
+    }
+
+
+]
