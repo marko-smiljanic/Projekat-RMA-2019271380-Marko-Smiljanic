@@ -41,30 +41,6 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
     }
 
 
-//    public LiveData<ArrayList<String>> getUlogovan() {
-//        if(ulogovan == null){
-//            ulogovan = new MutableLiveData<>();
-//            setUlogovan(null);
-//        }
-//        return ulogovan;
-//    }
-//
-//    public void setUlogovan(ArrayList<String> lista){
-//        if(lista == null){
-//            lista = new ArrayList<String>();
-//
-//            SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCES_PREFIX, 0);  //getaplication mora da se pise jer se to u main activity-ju kada sam radio podrazumevalo a ovo je view model
-//            String zz = sharedPreferences.getString(SHARED_PREFERENCES_ULOGOVAN, "nije");       //ako ne nadje nista bice postavljeno nije
-//            if(zz.equals("nije")){  //ako je vrednost default-na
-//                return;
-//            }else{
-//                lista.add(zz);
-//                this.ulogovan.setValue(lista);
-//            }
-//        }
-//    }
-
-
     public LiveData<ArrayList<Korisnik>> getSviKorisnici(){  //ako je null onda ga instanciraj i pozovi njegov seter
         if(ulogovaniKorisnik == null){
             ulogovaniKorisnik = new MutableLiveData<>();

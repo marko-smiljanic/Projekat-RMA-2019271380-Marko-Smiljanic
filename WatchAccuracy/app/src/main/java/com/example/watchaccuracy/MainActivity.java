@@ -39,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         //gde radim prelazak sa jednog fragmenta na drugi? U fragmentu?
 
 
+        //kako da odradim slanje zahteva i proveri pri iscrtavanju naloga korisnika?
+        //u fragmentu forma nalog ili u view model-u pa da ga observe-uje fragment za nalog?
+        //da jednostavno dohvatim sve korisnike i setujem ulogovanog korisnika kojeg cu cuvati u shared preferences?
+        //treba da se odradi kreiranje naloga korisnika, odnosno prvo slanje post zahteva na api a onda prikaz, kako to odraditi?
+
+
+
     }
 
 }
