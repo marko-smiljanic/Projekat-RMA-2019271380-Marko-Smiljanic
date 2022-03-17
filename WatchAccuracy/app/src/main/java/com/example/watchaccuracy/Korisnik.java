@@ -10,10 +10,11 @@ public class Korisnik {
     public Korisnik() {
     }
 
-    public Korisnik(String korisnickoIme, String lozinka, String email) {
+    public Korisnik(String korisnickoIme, String lozinka, String email, boolean platioFulVerzijuAplikacije) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.email = email;
+        this.platioFulVerzijuAplikacije = platioFulVerzijuAplikacije;
     }
 
     public String getKorisnickoIme() {
@@ -40,10 +41,19 @@ public class Korisnik {
         this.email = email;
     }
 
-    public void placanjeFulVerzijeAplikacije(){
-        this.platioFulVerzijuAplikacije = true;
+    public boolean isPlatioFulVerzijuAplikacije() {
+        return platioFulVerzijuAplikacije;
     }
 
+    public void setPlatioFulVerzijuAplikacije(boolean platioFulVerzijuAplikacije) {
+        this.platioFulVerzijuAplikacije = platioFulVerzijuAplikacije;
+    }
 
+    public boolean isDodatPrviSat() {
+        return dodatPrviSat;
+    }
 
+    public void setDodatPrviSat(boolean dodatPrviSat) {
+        this.dodatPrviSat = dodatPrviSat;
+    }
 }

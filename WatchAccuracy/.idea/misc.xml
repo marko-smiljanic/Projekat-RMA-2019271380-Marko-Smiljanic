@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_forma_nalog.xml" value="0.1762295081967213" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_korisnik.xml" value="0.176" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_prvo_pokretanje.xml" value="0.176" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
