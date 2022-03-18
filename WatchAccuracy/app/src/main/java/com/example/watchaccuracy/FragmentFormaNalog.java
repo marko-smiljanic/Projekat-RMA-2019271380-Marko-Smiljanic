@@ -97,7 +97,7 @@ public class FragmentFormaNalog extends Fragment {
                     return;                                                                         //ako je ulogovan necemo praviti nalog
                 }else if(ulogovan.equals("nije")){
                     //TODO: treba da se odradi kreiranje naloga korisnika, odnosno prvo slanje POST zahteva na api, a nakon toga prikaz, kako to odraditi?
-                    
+
 
                 }
 

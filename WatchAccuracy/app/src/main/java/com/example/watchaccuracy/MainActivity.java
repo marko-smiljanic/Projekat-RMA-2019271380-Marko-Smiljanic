@@ -23,16 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Kako da omogucim da aplikacija sama na pocetku radi dohvatanje iz api-ja i da sam radi npr. iscitavanje iz shared preferences
-        //ako radim sa view modelom????
-        //i zbog cega ne radi shared preferences, ovo sam nasao, u fragmentu moram sa getactivity, u view modelu sa getapplication
-        //gde bih implementirao setovanje ulogovanog u shared preferences? Na kraju kada kreira nalog?
-        //da li bih mogao da imam atribut ulogovan u fragmentu prvo pokretanje pa da tamo iscrtavam u zavinsosti od njegove vredosti
-
-        //kako da se na onclick u fragment prvo pokretanje navigiram dalje na prikaze fragmenata?
-        //ako budem brkao po fragmentima i tamo onda?
-
-
+        //Kako da omogucim da aplikacija sama na pocetku radi dohvatanje iz api-ja i da sam radi npr. iscitavanje iz shared preferences ako radim sa view modelom
 
         //imam dva nacina da radim sa fragmentima. Nesto im direktno prosledim i oni sa tim rade (npr. iscrtavaju)
         //preko view modela se iscrtava kada se nesto promeni. Dakle fragment radi observe nad podacima iz view modela
@@ -43,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         //u fragmentu forma nalog ili u view model-u pa da ga observe-uje fragment za nalog?
         //da jednostavno dohvatim sve korisnike i setujem ulogovanog korisnika kojeg cu cuvati u shared preferences?
         //treba da se odradi kreiranje naloga korisnika, odnosno prvo slanje post zahteva na api a onda prikaz, kako to odraditi?
-
 
 
     }
