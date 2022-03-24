@@ -54,21 +54,20 @@ public class FragmentPrvoPokretanje extends Fragment {
         View vv = inflater.inflate(R.layout.fragment_prvo_pokretanje, container, false);
         ConstraintLayout cl = vv.findViewById(R.id.mainLayoutPrvoPokretanje);
 
-        ulogovan = LokalnoCuvanjeSharedPreferences.ucitajDaLiJeUlogovan(getActivity());  //setujemo ulogovan
+        ulogovan = LokalnoCuvanjeSharedPreferences.ucitajDaLiJeUlogovan(getActivity());   //proveravamo da li je ulogovan ili nije jer nam od toga zavisi koji cemo prikaz iscrtati
         if(ulogovan.equals("nije")){
             iscrtajPrvoPokretanje(cl);  //iscrtaj ovaj fragment
 
         }else if(ulogovan.equals("jeste")){
             //TODO: iscrtaj nesto drugo, npr. prikazi pocetni ekran gde bi trebali biti satovi, dalje logiku radim tamo
             //u ovom fragmentu stoji samo neki dummy tekst za sada jer mi je bilo bitno da li prikazi rade na nacin na koji ocekujem, tj. da unutar jednog fragmenta mogu da zovem prikaz drugog
-            //mogao bih kroz new instance da prosledim ovo ulogovan jeste-nije u naredni fragment preko new instance kao parametar i unutar toga kroz seter setovati atribut klase tog fragmenta
+            //mogao bih kroz new instance da prosledim ovo ulogovan jeste-nije u naredni fragment preko new instance kao parametar i unutar toga kroz seter setovati atribut klase tog fragmenta (u slucaju da ne radim sve preko shared preferences)
             FragmentManager fm = getActivity().getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentKorisnik");
+            ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
             //ft.addToBackStack("fragmentKorisnik");  //u ovom slucaju mi ovo ne treba
             ft.commit();
         }
-
         return vv;
     }
 
@@ -81,7 +80,7 @@ public class FragmentPrvoPokretanje extends Fragment {
         imamNalog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LokalnoCuvanjeSharedPreferences.sacuvajKojeJeKliknutoDugme(getActivity(), "imamNalog");
+                LokalnoCuvanjeSharedPreferences.sacuvajKojeJeKliknutoDugme(getActivity(), "imamNalog");  //cuvamo u shared preferences na koje je dugme kliknuto jer nam od toga zavisi prikaz u fragmentu koji sledi. Da nisam hteo da mi se fragment koji sledi prikazuje genericki, jednostavno bi im naveo da predju na druge fragmente (bez shared preferences u ovom slucaju)
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();

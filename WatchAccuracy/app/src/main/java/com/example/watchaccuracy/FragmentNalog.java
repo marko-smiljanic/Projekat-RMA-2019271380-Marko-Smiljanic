@@ -46,7 +46,7 @@ public class FragmentNalog extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View vv = inflater.inflate(R.layout.fragment_korisnik, container, false);
+        View vv = inflater.inflate(R.layout.fragment_nalog, container, false);
         ConstraintLayout l = vv.findViewById(R.id.mainlyt);
         //kad god se azurira lista oglasa treba iscrtati
 
