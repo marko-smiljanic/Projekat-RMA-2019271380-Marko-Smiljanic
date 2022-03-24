@@ -26,11 +26,7 @@ public class MainActivity extends AppCompatActivity {
         LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getApplicationContext(), "");
         //ovo je bukvalno realizovana odjava korisnika, samo sto bih se posle ovoga prebacio na fragment prvo pokretanje
 
-
-
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
+        
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje")
