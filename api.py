@@ -29,7 +29,7 @@ def prikaz_svih():
 
 @app.route('/dodajJednogKorisnika', methods=["POST"])
 def dodaj_korisnika():
-    recnik = dict(flask.request.form)                         #ovo valjda radi za volley iz klijenta?
+    recnik = dict(flask.request.form)                            #ovo je za za volley iz klijenta?
     #recnik = dict(flask.request.json)                           #za testiranje u postman-u
     #print(recnik)
 
@@ -59,10 +59,29 @@ def dodaj_korisnika():
         return "sve ok", 201                                        #promenio sam da response ne bude ""
 
 
+@app.route('/ulogujKorisnika', methods=["POST"])                   #logovanje korisnika sa vec postojecim nalogom
+def uloguj_korisnika():
+    recnik = dict(flask.request.form)                         
+    #recnik = dict(flask.request.json)                           
+    #print(recnik)
+
+    recnik2 = {                                                
+        "korisnicko_ime": recnik["korisnicko_ime"],
+        "lozinka": recnik["lozinka"]
+    }    
+
+    with open("korisnici.json", "r") as ff:                    
+        json_data = json.load(ff)                              
+        for kk in json_data:
+            if kk["korisnicko_ime"] == recnik2["korisnicko_ime"]: 
+                if kk["lozinka"] == recnik2["lozinka"]:
+                    return "sve ok"                                 #ili da vratim korisnicko ime?
+
+        return "neispravan unos" 
 
 
 
 
-
+#########
 app.run("0.0.0.0", 5000)
 

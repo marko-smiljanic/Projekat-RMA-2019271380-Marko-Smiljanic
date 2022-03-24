@@ -121,8 +121,8 @@ public class FragmentFormaNalog extends Fragment {
                     //u ovom slucaju post zahteva moram proveriti sta je response i na osnovu njega odreagovati
 
                     RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                    queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
-                    //queue.getCache().remove("http://192.168.0.31:5000/dodajJednogKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
+                    //queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
+                    queue.getCache().remove("http://192.168.0.31:5000/dodajJednogKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
 
                     String url = "http://192.168.0.31:5000/dodajJednogKorisnika";
                     StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -189,29 +189,71 @@ public class FragmentFormaNalog extends Fragment {
 
         TextView naslov = ll.findViewById(R.id.textViewNaslov);
         naslov.setText("Unesite podatke da se ulogujete sa svojim nalogom:");
-
         Button potvrdi = ll.findViewById(R.id.buttonPotvrdi);
+
         potvrdi.setOnClickListener(new View.OnClickListener() {    //slanje get zahteva i vracanje korisnika koji se poklapa sa unetim vrednostima
             @Override
             public void onClick(View view) {
-                String korIme = inputKorIme.getText().toString();
-                String lozinka = inputLozinka.getText().toString();
 
                 ulogovan = LokalnoCuvanjeSharedPreferences.ucitajDaLiJeUlogovan(getActivity());
                 if(ulogovan.equals("jeste")){
                     return;
                 }else if(ulogovan.equals("nije")){
-                    return;
                     //TODO: stao sam ovde, kod post zahteva i provere da li takav korisnik postoji, ako postoji ulogujem ga (shared pref. na polja ulogovan i ulogovani korisnik)
                     //TODO: ako ne postoji takav korisnik onda vratim response od servera i prikazem toast "neispravan unos". Provere se rade na serveru.
                     //TODO: kada ovo odradim ostaje da odradim dalje prikaz pocetnog ekrana sa satovima.
+
+                    RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+                    //queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
+                    queue.getCache().remove("http://192.168.0.31:5000/ulogujKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
+
+                    String url = "http://192.168.0.31:5000/ulogujKorisnika";
+                    StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+                            if(response.equals("neispravan unos")){
+                                Toast.makeText(getActivity().getApplicationContext(), "Pogresan unos korisnickog imena ili lozinke!", Toast.LENGTH_LONG).show();
+                                return;
+                            }else if(response.equals("sve ok")){
+                                LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getActivity(), "jeste");                        //cuvamo status da je ulogovan
+                                LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getActivity(), inputKorIme.getText().toString());      //cuvamo korisnicko ime ulogovanog korisnika
+
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                                FragmentTransaction ft = fm.beginTransaction();
+                                ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
+                                //ft.addToBackStack("fragmentNalog");  //u ovom slucaju mi ovo ne treba
+                                ft.commit();
+
+                                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se ulogovali", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            System.out.println(error);
+                        }
+                    }){
+                        @Override
+                        public Map<String, String> getParams(){                                            //trebalo bi da moze da se stavi object umesto string i da direktno saljem niz ali psoto ne moze tako da se odradi override onda moram da saljem niz u obliuku json array-a i da ga konvertujem u string
+                            Map<String, String> params = new HashMap<String, String>();
+
+                            params.put("korisnicko_ime", inputKorIme.getText().toString());
+                            params.put("lozinka", inputLozinka.getText().toString());
+
+                            return params;
+                        }
+                    };
+                    queue.add(request);
                 }
-
-
             }
         });
-
     }
+
+
+
+
 
 
 

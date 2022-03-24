@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,11 +24,13 @@ public class MainActivity extends AppCompatActivity {
         //ovo mi sluzi za potrebe testiranja u procesu razvoja (da ponistim neke prikaze u aplikaciji jer zavise od ovih vrednosti iz shared preferences, pa ih ovde rucno setujem na ono sta mi treba)
         LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getApplicationContext(), "nije");  //npr u ovom slucaju hocu da mi uvek otvori pocetni ekran za logovanje
         LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getApplicationContext(), "");
+        //ovo je bukvalno realizovana odjava korisnika, samo sto bih se posle ovoga prebacio na fragment prvo pokretanje
 
 
 
 
-
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje")
