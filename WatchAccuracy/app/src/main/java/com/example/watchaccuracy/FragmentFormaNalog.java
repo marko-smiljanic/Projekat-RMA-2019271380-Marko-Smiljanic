@@ -121,10 +121,10 @@ public class FragmentFormaNalog extends Fragment {
                     //u ovom slucaju post zahteva moram proveriti sta je response i na osnovu njega odreagovati
 
                     RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                    //queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
-                    queue.getCache().remove("http://192.168.0.31:5000/dodajJednogKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
+                    queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
+                    //queue.getCache().remove("http://192.168.0.32:5000/dodajJednogKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
 
-                    String url = "http://192.168.0.31:5000/dodajJednogKorisnika";
+                    String url = "http://192.168.0.32:5000/dodajJednogKorisnika";
                     StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -204,10 +204,10 @@ public class FragmentFormaNalog extends Fragment {
                     //TODO: kada ovo odradim ostaje da odradim dalje prikaz pocetnog ekrana sa satovima.
 
                     RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                    //queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
-                    queue.getCache().remove("http://192.168.0.31:5000/ulogujKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
+                    queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
+                    //queue.getCache().remove("http://192.168.0.32:5000/ulogujKorisnika");    //moramo da ocistimo kes da volley ne bi zabadao
 
-                    String url = "http://192.168.0.31:5000/ulogujKorisnika";
+                    String url = "http://192.168.0.32:5000/ulogujKorisnika";
                     StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

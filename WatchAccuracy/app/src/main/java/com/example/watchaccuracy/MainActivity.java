@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getApplicationContext(), "");
         //ovo je bukvalno realizovana odjava korisnika, samo sto bih se posle ovoga prebacio na fragment prvo pokretanje
 
-        
+
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje")

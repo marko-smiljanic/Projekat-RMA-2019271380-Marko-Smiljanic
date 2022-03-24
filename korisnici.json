@@ -24,21 +24,9 @@
     "platio_ful_verziju": "false"
   },
   {
-    "korisnicko_ime": "djoka",
-    "lozinka": "aaa",
-    "email": "aaa",
-    "platio_ful_verziju": "false"
-  },
-  {
-    "korisnicko_ime": "djoka123",
-    "lozinka": "aaa",
-    "email": "aaa123",
-    "platio_ful_verziju": "false"
-  },
-  {
-    "korisnicko_ime": "gggg",
-    "lozinka": "ggg",
-    "email": "gg@aagggaa",
+    "korisnicko_ime": "test",
+    "lozinka": "test",
+    "email": "test@test",
     "platio_ful_verziju": "false"
   }
 ]

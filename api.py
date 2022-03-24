@@ -1,5 +1,5 @@
-import email
-from types import MethodDescriptorType
+#import email
+#from types import MethodDescriptorType
 import flask, json
 from flask import Flask, request
 import json
