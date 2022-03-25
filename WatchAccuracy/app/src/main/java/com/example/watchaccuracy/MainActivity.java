@@ -18,16 +18,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ///////////////////////////////////////
-        //prvi (pocenti) fragment se dodaje sa add, ostali se dodaju sa replace, i ako stavimo add to back stack onda se sa prikazanog fragmenta vraca na prethodni
-        //main activity treba samo da barata fragmentima i nista drugo
-
         //ovo mi sluzi za potrebe testiranja u procesu razvoja (da ponistim neke prikaze u aplikaciji jer zavise od ovih vrednosti iz shared preferences, pa ih ovde rucno setujem na ono sta mi treba)
-        LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getApplicationContext(), "nije");  //npr u ovom slucaju hocu da mi uvek otvori pocetni ekran za logovanje
-        LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getApplicationContext(), "");
+        //LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getApplicationContext(), "nije");  //npr u ovom slucaju hocu da mi uvek otvori pocetni ekran za logovanje
+        //LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getApplicationContext(), "");
         //ovo je bukvalno realizovana odjava korisnika, samo sto bih se posle ovoga prebacio na fragment prvo pokretanje
 
 
 
+
+        //prvi (pocenti) fragment se dodaje sa add, ostali se dodaju sa replace, i ako stavimo add to back stack onda se sa prikazanog fragmenta vraca na prethodni
+        //main activity treba samo da barata fragmentima i nista drugo
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje")
                 .commit();

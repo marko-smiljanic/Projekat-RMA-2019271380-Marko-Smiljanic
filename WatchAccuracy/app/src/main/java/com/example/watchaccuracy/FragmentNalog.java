@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class FragmentNalog extends Fragment {
+public class FragmentNalog extends Fragment {  //ovo je u stvari pocetni ekran
     public MojViewModel viewModel;
 
     public FragmentNalog(){}
@@ -49,6 +49,7 @@ public class FragmentNalog extends Fragment {
         View vv = inflater.inflate(R.layout.fragment_nalog, container, false);
         ConstraintLayout l = vv.findViewById(R.id.mainlyt);
         //kad god se azurira lista oglasa treba iscrtati
+        //ovaj observe odraditi za iscrtavanje satova
 
 //        viewModel.getJedanSelektovani().observe(getViewLifecycleOwner(), new Observer<Oglas>() {
 //            @Override
@@ -67,10 +68,12 @@ public class FragmentNalog extends Fragment {
     private void drawData(ConstraintLayout ll){
         TextView tv = ll.findViewById(R.id.labelaNalog);
         tv.setText("Ucitavanje uspelo !!!!!!!!!!");
-    }
-
-    private void ucitajDaLiJeUlogovan(){
+        //TODO: stao sam kod iscrtavanja opcija spinner-a. U opcije dodati korisnicko ime naloga (ne moze da se klikne), About i odjava
 
     }
+
+
+
+
 
 }

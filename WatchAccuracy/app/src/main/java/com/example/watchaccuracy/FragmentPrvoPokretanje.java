@@ -59,9 +59,9 @@ public class FragmentPrvoPokretanje extends Fragment {
             iscrtajPrvoPokretanje(cl);  //iscrtaj ovaj fragment
 
         }else if(ulogovan.equals("jeste")){
-            //TODO: iscrtaj nesto drugo, npr. prikazi pocetni ekran gde bi trebali biti satovi, dalje logiku radim tamo
-            //u ovom fragmentu stoji samo neki dummy tekst za sada jer mi je bilo bitno da li prikazi rade na nacin na koji ocekujem, tj. da unutar jednog fragmenta mogu da zovem prikaz drugog
+            //iscrtaj pocetni ekran, tj. gde bi trebali biti satovi, dalje logiku radim tamo
             //mogao bih kroz new instance da prosledim ovo ulogovan jeste-nije u naredni fragment preko new instance kao parametar i unutar toga kroz seter setovati atribut klase tog fragmenta (u slucaju da ne radim sve preko shared preferences)
+
             FragmentManager fm = getActivity().getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");

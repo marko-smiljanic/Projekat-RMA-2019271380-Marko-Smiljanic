@@ -147,7 +147,6 @@ public class FragmentFormaNalog extends Fragment {
 
                                 Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se kreirali nalog!", Toast.LENGTH_LONG).show();
                             }
-
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -194,14 +193,19 @@ public class FragmentFormaNalog extends Fragment {
         potvrdi.setOnClickListener(new View.OnClickListener() {    //slanje get zahteva i vracanje korisnika koji se poklapa sa unetim vrednostima
             @Override
             public void onClick(View view) {
-
                 ulogovan = LokalnoCuvanjeSharedPreferences.ucitajDaLiJeUlogovan(getActivity());
                 if(ulogovan.equals("jeste")){
+                    System.out.println("Korisnik je vec ulogovan. Greska.");
                     return;
                 }else if(ulogovan.equals("nije")){
-                    //TODO: stao sam ovde, kod post zahteva i provere da li takav korisnik postoji, ako postoji ulogujem ga (shared pref. na polja ulogovan i ulogovani korisnik)
-                    //TODO: ako ne postoji takav korisnik onda vratim response od servera i prikazem toast "neispravan unos". Provere se rade na serveru.
-                    //TODO: kada ovo odradim ostaje da odradim dalje prikaz pocetnog ekrana sa satovima.
+                    //post zahtev i provera da li takav korisnik postoji, ako postoji ulogujem ga (shared pref. na polja ulogovan i ulogovani korisnik)
+                    //ako ne postoji takav korisnik onda vratim response od servera i prikazem toast "neispravan unos". Provere se rade na serveru.
+                    //kada ovo odradim ostaje da odradim dalje prikaz pocetnog ekrana sa satovima.
+
+                    while(inputKorIme.getText().toString().equals("") || inputLozinka.getText().toString().equals("")) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Sva polja su obavezna!", Toast.LENGTH_LONG).show();
+                        return;                                                                     //prekidamo izvrsavanje onclick-a i beskonacne while petlje
+                    }
 
                     RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                     queue.getCache().clear();   //mozda da se kes cisti ovde umesto na kraju?
@@ -250,9 +254,6 @@ public class FragmentFormaNalog extends Fragment {
             }
         });
     }
-
-
-
 
 
 
