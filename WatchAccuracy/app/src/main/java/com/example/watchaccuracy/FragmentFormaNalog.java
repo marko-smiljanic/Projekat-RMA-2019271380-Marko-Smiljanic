@@ -1,7 +1,5 @@
 package com.example.watchaccuracy;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -141,7 +137,7 @@ public class FragmentFormaNalog extends Fragment {
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
-                                ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
+                                ft.replace(R.id.fragmentView, FragmentPocetniEkran.newInstance(), "fragmentPocetniEkran");
                                 //ft.addToBackStack("fragmentNalog");  //u ovom slucaju mi ovo ne treba
                                 ft.commit();
 
@@ -225,7 +221,7 @@ public class FragmentFormaNalog extends Fragment {
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
-                                ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
+                                ft.replace(R.id.fragmentView, FragmentPocetniEkran.newInstance(), "fragmentPocetniEkran");
                                 //ft.addToBackStack("fragmentNalog");  //u ovom slucaju mi ovo ne treba
                                 ft.commit();
 

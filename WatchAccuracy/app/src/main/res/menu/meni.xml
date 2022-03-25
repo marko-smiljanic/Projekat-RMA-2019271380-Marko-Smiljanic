@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menuItemNalog"
+        android:title="Nalog"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menuItemOAplikaciji"
+        android:title="O aplikaciji" />
+    <item
+        android:id="@+id/menuItemOdjava"
+        android:title="Odjava" />
+</menu>

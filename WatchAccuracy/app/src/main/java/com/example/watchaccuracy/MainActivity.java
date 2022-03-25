@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         //prvi (pocenti) fragment se dodaje sa add, ostali se dodaju sa replace, i ako stavimo add to back stack onda se sa prikazanog fragmenta vraca na prethodni
         //main activity treba samo da barata fragmentima i nista drugo
         getSupportFragmentManager().beginTransaction()

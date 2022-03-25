@@ -21,7 +21,7 @@ def prikaz_jednog_korisnika(korisnickoIme):
                 if kk["korisnicko_ime"] == korisnickoIme:
                     return str(kk)
     except(Exception):
-        return "Greška"
+        return "greska"
 
 @app.route('/dobaviSveKorisnike', methods=["GET"])
 def prikaz_svih():
@@ -78,6 +78,30 @@ def uloguj_korisnika():
                     return "sve ok"                                 #ili da vratim korisnicko ime?
 
         return "neispravan unos" 
+
+
+@app.route('/platiFulVerziju/<string:korisnickoIme>', methods=["GET"])       #moram obezbediti da korisnicko ime bude jedinstveno!!!!
+def plati_ful_verziju(korisnickoIme):
+    try:
+        with open("korisnici.json") as f:
+            data = json.load(f)
+            for kk in data:
+                if kk["korisnicko_ime"] == korisnickoIme:
+                    if kk["platio_ful_verziju"] == "true":
+                        return "korisnik je vec platio"
+                    elif kk["platio_ful_verziju"] == "false":
+                        kk["platio_ful_verziju"] = "true"
+
+                        #sada izmenu treba da zapisemo u fajl
+                        data = list(data)                                 #pretvorimo u listu jer je tako upisan u json-u, tj. pocinje i zavrsava se sa [ ]
+
+                        with open ("korisnici.json", "w") as zz:                    #prepisemo izmenjeni fajl na postojeci, tj. novi samo sacuvamo preko starog (jer tako se menja fajl, obrisi sve sto je bilo i dodaj novi fajl sa izmenama)
+                            json.dump(data, zz, indent=2)
+                            return "sve ok"  
+    except(Exception):
+        return "greska"
+
+                    
 
 
 

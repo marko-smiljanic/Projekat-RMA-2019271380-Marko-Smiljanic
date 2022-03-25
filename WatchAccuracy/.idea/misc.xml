@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2015625" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2015625" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/drawable/ic_nalog.xml" value="0.2015625" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/drawable/nalog.xml" value="0.2015625" />
         <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/activity_main.xml" value="0.152" />
         <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_forma_nalog.xml" value="0.2" />
         <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_korisnik.xml" value="0.176" />
         <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_nalog.xml" value="0.189453125" />
         <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/layout/fragment_prvo_pokretanje.xml" value="0.176" />
+        <entry key="..\:/Users/Marko/Desktop/FAKS 3/1. RAZVOJ MOBILNIH APLIKACIJA/Vezbanje/Projekat-RMA-2019271380-Marko-Smiljanic/WatchAccuracy/app/src/main/res/menu/meni.xml" value="0.189453125" />
       </map>
     </option>
   </component>

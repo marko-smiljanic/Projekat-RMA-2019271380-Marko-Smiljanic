@@ -1,6 +1,5 @@
 package com.example.watchaccuracy;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +63,7 @@ public class FragmentPrvoPokretanje extends Fragment {
 
             FragmentManager fm = getActivity().getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
+            ft.replace(R.id.fragmentView, FragmentPocetniEkran.newInstance(), "fragmentPocetniEkran");
             //ft.addToBackStack("fragmentKorisnik");  //u ovom slucaju mi ovo ne treba
             ft.commit();
         }

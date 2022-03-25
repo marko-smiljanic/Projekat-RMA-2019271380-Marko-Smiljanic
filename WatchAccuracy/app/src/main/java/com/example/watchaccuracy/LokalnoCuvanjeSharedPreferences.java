@@ -53,6 +53,16 @@ public class LokalnoCuvanjeSharedPreferences {                                  
         editor.putString(SHARED_PREFERENCES_ULOGOVANI_KORISNIK, korIme);
         editor.commit();
     }
+    public static String ucitajUlogovanogKorisnika(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(LokalnoCuvanjeSharedPreferences.SHARED_PREFERENCES_PREFIX, 0);
+        String zz = sharedPreferences.getString(LokalnoCuvanjeSharedPreferences.SHARED_PREFERENCES_ULOGOVANI_KORISNIK, "");
+
+        if(zz.equals("")){
+            System.out.println("Greska u citanju iz shared preferences!!");
+            return "prazno";
+        }
+        return zz;
+    }
 
 
 
