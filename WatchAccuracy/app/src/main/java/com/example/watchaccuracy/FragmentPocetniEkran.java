@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -83,36 +84,52 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
 
     private void drawData(ConstraintLayout ll, String korisnickoIme){
         TextView tv = ll.findViewById(R.id.labelaNalog);
-        tv.setText("Ucitavanje uspelo !!!!!!!!!!");
-        //TODO: stao sam kod iscrtavanja opcija menija. U opcije dodati korisnicko ime naloga (da moze da klikne i da pogleda informacije o nalogu), About i odjava
+        tv.setText("Ucitavanje uspelo !!!");
+        //Odradio sam iscrtavanje opcija menija. To je odradjeno u posebnoj metodi menija koja se redefinise i u onCreate fragmenta omogucimo njeno pozivanje
+
+        //TODO: ostalo mi je da odradim satove i njihovo prikazivanje i pravljenje checkpoint-a
+        //TODO: ogranicenje koje moram imati kod kreiranja satova je: ako nije platio ful verziju setujem on click listener na neki toast koji ga obavestava (u pitanju je dugme dodaj novi sat), bukvalno prekopiram api kod iz fragmenta nalog
+        //TODO: ako je platio ful verziju setujem funkcionalnost dodavanja sata
+
+
 
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {  //kreiranje menija, poziva se sam ali u oncreate metodi fragmenta moram da imam
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {                             //kreiranje menija, poziva se sam ali u oncreate metodi fragmenta moram da imam
         inflater.inflate(R.menu.meni, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {              //kada se selektuje neki element iz menija, odnosno onclick za menu iteme
+    public boolean onOptionsItemSelected(MenuItem item) {                                       //kada se selektuje neki element iz menija, odnosno onclick za menu iteme
         // Handle item selection
+
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
         switch (item.getItemId()) {
             case R.id.menuItemNalog:
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.fragmentView, FragmentNalog.newInstance(), "fragmentNalog");
                 ft.addToBackStack("fragmentNalog");
                 ft.commit();
                 return true;
             case R.id.menuItemOAplikaciji:
-
+                ft.replace(R.id.fragmentView, FragmentOAplikaciji.newInstance(), "fragmentOAplikaciji");
+                ft.addToBackStack("fragmentOAplikaciji");
+                ft.commit();
                 return true;
-            case R.id.menuItemOdjava:
+            case R.id.menuItemOdjava:                                                           //odjava odradjena u main activity-ju kada mije za svako pokretanje aplikacije bilo potrebno da korisnik ne bude ulogovan, prekopirati
+                LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getActivity().getApplicationContext(), "nije");
+                LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getActivity().getApplicationContext(), "");
+                //Da li sam trebao da ubacim neki podekran koji bi trebalo da pita da li ste sigurni da zelite da se odjavite?
 
+                ft.replace(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje");
+                ft.addToBackStack("fragmentOAplikaciji");
+                ft.commit();
+                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se odjavili!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);     //false
+                return super.onOptionsItemSelected(item);  //false
         }
     }
 

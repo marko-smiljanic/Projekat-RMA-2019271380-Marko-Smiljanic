@@ -100,7 +100,6 @@ def plati_ful_verziju(korisnickoIme):
                             return "sve ok"  
     except(Exception):
         return "greska"
-
                     
 
 
