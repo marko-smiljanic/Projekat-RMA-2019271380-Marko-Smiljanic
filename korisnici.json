@@ -27,6 +27,6 @@
     "korisnicko_ime": "test",
     "lozinka": "test",
     "email": "test@test",
-    "platio_ful_verziju": "true"
+    "platio_ful_verziju": "false"
   }
 ]

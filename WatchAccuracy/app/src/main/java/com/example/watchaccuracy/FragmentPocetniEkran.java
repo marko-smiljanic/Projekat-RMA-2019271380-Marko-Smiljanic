@@ -124,7 +124,7 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                 //Da li sam trebao da ubacim neki podekran koji bi trebalo da pita da li ste sigurni da zelite da se odjavite?
 
                 ft.replace(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje");
-                ft.addToBackStack("fragmentOAplikaciji");
+                //ft.addToBackStack("fragmentPrvoPokretanje");                                   //ovo ne treba jer zasto bi smo dozvolili korisniku mogucnost da se posle odjave vrati na ekran gde je potrebno da bude ulogovan
                 ft.commit();
                 Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se odjavili!", Toast.LENGTH_SHORT).show();
                 return true;

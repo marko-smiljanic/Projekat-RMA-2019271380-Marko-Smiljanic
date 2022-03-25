@@ -3,7 +3,7 @@ Projektat je prilagodjen za minimalnu verziju androida API 16: Android 4.1 (Jell
 
 Rad aplikacije:
 
-Korisniku se prvo prikazuje ekran dobrodoslice gde je korisnik upitan da li ima vec postojeci nalog za koriscenje 
+Korisniku se prvo prikazuje ekran pocetni ekran (ekran dobrodoslice) gde je korisnik upitan da li ima vec postojeci nalog za koriscenje 
 aplikacije ili nema. Ukoliko je korisnik vec ulogovan u aplikaciju sa nalogom onda mu se ne iscrtava prikaz ekrana 
 dobrodoslice nego se direktno salje na pocetnu stranicu aplikacije gde su prikazani njegovi satovi.
 
@@ -20,6 +20,13 @@ autenticnosti unetih podataka i korisnik dobija jasna obavestenja ukoliko podaci
 su onsovne provere, da nije polje za unos prazno, da mejl sadrzi "@". Nakon sto pravilno unese podatke i dobije 
 "zeleno svetlo" od servera korisnik ima napravljeni nalog (sa kojim je ujedno i ulogovan) i dalje se navigira 
 na pocetnu stranicu aplikacije gde su mu prikazani njegovi satovi.
+
+Na pocetnoj stranici aplikacije imamo meni koji ima stavke: nalog (vodi na ekran koji daje informacije o nasem nalogu
+i funkcionalnost da se kupi ful verzija aplikacije, tj. samo simulacija tako necega), o aplikaciji (vodi na prikaz about dela
+gde je objasnjeno kako aplikacija treba da radi i koja joj je svrha), odjava (omogucuje korisniku odjavu i vraca ga na 
+ekran dobrodoslice)
+
+
 
 
 
