@@ -22,9 +22,12 @@ su onsovne provere, da nije polje za unos prazno, da mejl sadrzi "@". Nakon sto 
 na pocetnu stranicu aplikacije gde su mu prikazani njegovi satovi.
 
 Na pocetnoj stranici aplikacije imamo meni koji ima stavke: nalog (vodi na ekran koji daje informacije o nasem nalogu
-i funkcionalnost da se kupi ful verzija aplikacije, tj. samo simulacija tako necega), o aplikaciji (vodi na prikaz about dela
+i funkcionalnost da se kupi ful verzija aplikacije, tj. samo simulacija tako necega. Salje se post zahtev gde se 
+proverava da vec nema kupljenu ful verziju, i ako nema onda je uspesno kupio), o aplikaciji (vodi na prikaz about dela
 gde je objasnjeno kako aplikacija treba da radi i koja joj je svrha), odjava (omogucuje korisniku odjavu i vraca ga na 
-ekran dobrodoslice)
+ekran dobrodoslice. Odjava je realizovana tako sto se iz shared preference izbaci ulogovan korisnik i ulogovan setuje na nije)
+
+
 
 
 

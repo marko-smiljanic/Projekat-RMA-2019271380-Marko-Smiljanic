@@ -46,5 +46,5 @@ Dodati dole fiksan natpis da mora proci min 8 sati izmedju 1. i 2. checkpointa (
 U help dodati objasnjenje da sat treba proveriti u vise stanja da bi se dobio realan rezultat. Da je sat u razlicitim polozajima, 
 da se nosi, da je skroz navijen i da nije skroz navijen
 
-omoguciti koriscenja senzora kamere da moze da se uslika sat kada se dodaje novi
+MOZDA????: omoguciti koriscenja senzora kamere da moze da se uslika sat kada se dodaje novi
 ..........................................

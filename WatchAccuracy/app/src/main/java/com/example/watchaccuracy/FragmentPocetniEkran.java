@@ -7,6 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +57,7 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View vv = inflater.inflate(R.layout.fragment_pocetni_ekran, container, false);
-        ConstraintLayout l = vv.findViewById(R.id.mainlyt);
+        LinearLayout l = vv.findViewById(R.id.mainLytPocetniEkran);
 
 
         String korisnickoIme = LokalnoCuvanjeSharedPreferences.ucitajUlogovanogKorisnika(getActivity());
@@ -63,7 +65,6 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
             System.out.println("GRESKA");
             return null;
         }
-
 
         //kad god se azurira lista oglasa treba iscrtati
         //ovaj observe odraditi za iscrtavanje satova
@@ -75,24 +76,34 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
 //            }
 //        });
 
-
-
         drawData(l, korisnickoIme);
 
         return vv;
     }
 
-    private void drawData(ConstraintLayout ll, String korisnickoIme){
-        TextView tv = ll.findViewById(R.id.labelaNalog);
-        tv.setText("Ucitavanje uspelo !!!");
+    private void drawData(ViewGroup container, String korisnickoIme){
         //Odradio sam iscrtavanje opcija menija. To je odradjeno u posebnoj metodi menija koja se redefinise i u onCreate fragmenta omogucimo njeno pozivanje
 
-        //TODO: ostalo mi je da odradim satove i njihovo prikazivanje i pravljenje checkpoint-a
+        //napravljena baza za satove i checkpoint-e
+        //TODO: ostalo mi je da odradim na klijentu satove i njihovo prikazivanje i pravljenje checkpoint-a
         //TODO: ogranicenje koje moram imati kod kreiranja satova je: ako nije platio ful verziju setujem on click listener na neki toast koji ga obavestava (u pitanju je dugme dodaj novi sat), bukvalno prekopiram api kod iz fragmenta nalog
         //TODO: ako je platio ful verziju setujem funkcionalnost dodavanja sata
+        container.removeAllViews();
+
+        LayoutInflater inf = getLayoutInflater();
+        View red = inf.inflate(R.layout.layout_sat, null);
+        red.findViewById(R.id.layoutSatRed);
+
+        Button izmeniSat = red.findViewById(R.id.dugmeIzmeniSat);
+        Button obrisiSat = red.findViewById(R.id.dugmeObrisiSat);
+        TextView labelaPoslednjiCheck = red.findViewById(R.id.labelaPoslednjiCheck);
+
+        //nesto .......
 
 
 
+
+        container.addView(red);
     }
 
     @Override
@@ -104,7 +115,6 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {                                       //kada se selektuje neki element iz menija, odnosno onclick za menu iteme
         // Handle item selection
-
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         switch (item.getItemId()) {
