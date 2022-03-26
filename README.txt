@@ -27,6 +27,8 @@ proverava da vec nema kupljenu ful verziju, i ako nema onda je uspesno kupio), o
 gde je objasnjeno kako aplikacija treba da radi i koja joj je svrha), odjava (omogucuje korisniku odjavu i vraca ga na 
 ekran dobrodoslice. Odjava je realizovana tako sto se iz shared preference izbaci ulogovan korisnik i ulogovan setuje na nije)
 
+Dalje na pocetnoj stranici mozemo osim menija videti i satove, .........
+
 
 
 
