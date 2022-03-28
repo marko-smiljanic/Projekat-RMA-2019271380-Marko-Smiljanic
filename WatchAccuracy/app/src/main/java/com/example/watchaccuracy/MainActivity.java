@@ -31,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
         //4.1, api 26 ili vecu mozemo da koristimo view-tool windows-app inspection, i tada mozemo da posmatramo kako izgleda nasa baza podataka i da pisemo upite, npr. select * da vidimo sadrzaj baze
 
         //kreiranje baze
-        Baza baza = new Baza(getApplicationContext());
-        SQLiteDatabase db = baza.getWritableDatabase();
+//        Baza baza = new Baza(getApplicationContext());
+//        SQLiteDatabase db = baza.getWritableDatabase();
 
-        baza.onCreate(db);                                                          //onCreate mozemo ostaviti jer u upitu stoji if not exist, tako da necep ponistiti podatke koje imamo
+        //baza.onCreate(db);                                                          //onCreate mozemo ostaviti jer u upitu stoji if not exist, tako da necep ponistiti podatke koje imamo
         //baza.brisiSve(db, 0, 0);
         //baza.brisiSve(db);
 
-        BazaSat bazaSat = new BazaSat(baza);
-        BazaCheckpoint bazaCheckpoint = new BazaCheckpoint(baza);
+//        BazaSat bazaSat = new BazaSat(baza);
+//        BazaCheckpoint bazaCheckpoint = new BazaCheckpoint(baza);
 
 
         //***********TABELA SATOVI

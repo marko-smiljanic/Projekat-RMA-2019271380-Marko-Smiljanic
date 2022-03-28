@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,7 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FragmentNalog extends Fragment {
-
+    public MojViewModel viewModel;
     public FragmentNalog(){
 
     }
@@ -41,20 +43,20 @@ public class FragmentNalog extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        viewModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
-//            @NonNull
-//            @Override
-//            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-//                try{
-//                    return modelClass.newInstance();
-//                } catch (IllegalAccessException e) {
-//                    e.printStackTrace();
-//                } catch (java.lang.InstantiationException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        }).get(MojViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                try{
+                    return modelClass.newInstance();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (java.lang.InstantiationException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }).get(MojViewModel.class);
     }
 
     @Override
@@ -101,6 +103,7 @@ public class FragmentNalog extends Fragment {
                             Toast.makeText(getActivity().getApplicationContext(), "Ful verzija uspesno uplacena!", Toast.LENGTH_LONG).show();
                             platioLabela.setText("Kupljena ful verzija");
                         }
+                        viewModel.setUlogovani();
                     }
                 }, new Response.ErrorListener() {
                     @Override
