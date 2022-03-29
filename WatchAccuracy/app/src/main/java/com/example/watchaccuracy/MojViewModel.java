@@ -4,6 +4,8 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -25,6 +27,7 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
     private MutableLiveData<Korisnik> ulogovaniKorisnik;
     private MutableLiveData<ArrayList<Sat>> satovi;
     private MutableLiveData<Sat> jedanSelektovaniSat;
+    private Korisnik kkk;
     ///////////////
 
     public MojViewModel(@NonNull Application application) {
@@ -39,9 +42,13 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
         return ulogovaniKorisnik;
     }
 
-    private void setujPolje(Korisnik kk){    //sluzi da bih unutar zahteva imao ulogovanog korisnika
-        this.ulogovaniKorisnik = new MutableLiveData<>();
-        this.ulogovaniKorisnik.setValue(kk);
+//    private void setujPolje(Korisnik kk){    //sluzi da bih unutar zahteva imao ulogovanog korisnika, ako ovako odradim imacu neazuriran prikaz, observe iz nekog razloga nece raditi ako ovo pozovem
+//        this.ulogovaniKorisnik = new MutableLiveData<>();
+//        this.ulogovaniKorisnik.setValue(kk);
+//    }
+
+    private MutableLiveData<Korisnik> dohvatiPoljeUlogovani(){     //obican seter koji koristim unutar aplikacije kada mi this nije dostupno
+        return this.ulogovaniKorisnik;
     }
 
     public void setUlogovani(){   //api zahtev koji dohvata ulogovanog korisnika sa prosledjenim kor imenom (iz shared preferences) i setovanje atributa ulogovani u view modelu
@@ -80,8 +87,12 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
                         }
                         kk.setPlatioFulVerzijuAplikacije(platio);
                     }
-
-                    setujPolje(kk);   //***********moram ovako da setujem ulogovanog korisnika jer ne mogu da odavde pristupam njemu sa this jer unutar request-a!!!
+                    //problem je bio jer sam setovao ulogovanog izvan ove funkcije
+                    //zbog toga sam napravio seter za ulogovanog i onda ga dohvatio i ovde setovao
+                    //isti je rezultat, ali je jako bitno (ne znam zasto) da se ulogovani setuje unutar ove funkcije
+                    //inace observe nece da radi kada se se tek pokrene aplikacija (moralo je da se prebaci na drugi fragment i kad se vratim na ovaj prethodni tek onda odradi prikaz)
+                    //setujPolje(kk);   //***********moram ovako da setujem ulogovanog korisnika jer ne mogu da odavde pristupam njemu sa this jer unutar request-a!!!
+                    dohvatiPoljeUlogovani().setValue(kk);
                 } catch (JSONException e) {
                     System.out.println("Greska prilikom konvertovanja u JSON tip podataka");
                     e.printStackTrace();

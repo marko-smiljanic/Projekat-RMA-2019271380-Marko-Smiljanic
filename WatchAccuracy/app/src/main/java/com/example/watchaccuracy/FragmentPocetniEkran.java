@@ -65,9 +65,8 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
         //TODO: zbog cega ne radi poziv set ulogovani?
         // rucno dohvatam podatke da bi mi prvi prikaz (pri prvom otvaranju aplikacije) bio odgovarajuci (azuriran)
 
-
         //viewModel.setSatovi();          //rucno i ovde pozivam za svaki slucaj
-        viewModel.setUlogovani();
+        //viewModel.setUlogovani();
 
         viewModel.getUlogovani().observe(getViewLifecycleOwner(), new Observer<Korisnik>() {     //kad god se azurira korisnik treba pozvati funkciju draw data
             @Override
@@ -82,9 +81,10 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                 iscrtajSatove(l, satovi);                           //ici ce u observe za satove
             }
         });
+
         //Odradio sam iscrtavanje opcija menija. To je odradjeno u posebnoj metodi menija koja se redefinise i u onCreate fragmenta omogucimo njeno pozivanje
         //napravljena baza za satove i checkpoint-e
-        //TODO: ostalo mi je da odradim na klijentu satove i njihovo prikazivanje i pravljenje checkpoint-a
+        //ostalo mi je da odradim na klijentu satove i njihovo prikazivanje i pravljenje checkpoint-a
         //ogranicenje koje moram imati kod kreiranja satova je: ako nije platio ful verziju setujem on click listener na neki toast koji ga obavestava (u pitanju je dugme dodaj novi sat)
         //a ako je platio ful verziju setujem funkcionalnost dodavanja sata
         //observe treba odraditi i za iscrtavanje satova
@@ -93,7 +93,6 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
         return vv;
     }
 
-    //TODO: iz nekog razloga ovo se ne izvrsi kad se pokrene aplikacija prvi put, observe se izvrsi i api zahtev, ali se ne prikaze nista
     private void iscrtajDugmeDodajSat(Korisnik korisnik, LinearLayout ll) {
         Button dodajSat = ll.findViewById(R.id.dugmeDodajNoviSat);                //dohvatanje dugmeta koje je u drugom layout-u
         if(korisnik.isPlatioFulVerzijuAplikacije() == false){

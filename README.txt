@@ -21,13 +21,24 @@ su onsovne provere, da nije polje za unos prazno, da mejl sadrzi "@". Nakon sto 
 "zeleno svetlo" od servera korisnik ima napravljeni nalog (sa kojim je ujedno i ulogovan) i dalje se navigira 
 na pocetnu stranicu aplikacije gde su mu prikazani njegovi satovi.
 
-Na pocetnoj stranici aplikacije imamo meni koji ima stavke: nalog (vodi na ekran koji daje informacije o nasem nalogu
-i funkcionalnost da se kupi ful verzija aplikacije, tj. samo simulacija tako necega. Salje se post zahtev gde se 
-proverava da vec nema kupljenu ful verziju, i ako nema onda je uspesno kupio), o aplikaciji (vodi na prikaz about dela
-gde je objasnjeno kako aplikacija treba da radi i koja joj je svrha), odjava (omogucuje korisniku odjavu i vraca ga na 
-ekran dobrodoslice. Odjava je realizovana tako sto se iz shared preference izbaci ulogovan korisnik i ulogovan setuje na nije)
+Na pocetnoj stranici aplikacije imamo meni koji ima stavke: 
+-nalog (vodi na ekran koji daje informacije o nasem nalogu i funkcionalnost da se kupi ful verzija aplikacije, 
+tj. samo simulacija tako necega. Salje se post zahtev gde se proverava da vec nema kupljenu ful verziju, i ako nema 
+onda je uspesno kupio, i to je to), 
+-o aplikaciji (vodi na prikaz about dela gde je objasnjeno kako aplikacija treba da radi i koja joj je svrha),
+-odjava (omogucuje korisniku odjavu i vraca ga na ekran dobrodoslice. Odjava je realizovana tako sto se iz 
+shared preference izbaci ulogovan korisnik i ulogovan se promeni takodje)
 
-Dalje na pocetnoj stranici mozemo osim menija videti i satove, .........
+Dalje na pocetnoj stranici mozemo osim menija videti i satove. Pojedinacni sat moze da se izmeni ili obrise.
+Opcija dodavanje sata je omogucena samo nalozima koji imaju uplaceno ful verziju aplikacije. Satovima upravlja lokalna baza.
+
+****Trebalo bi dodati da kada se uloguje nalog koji nema ful verziju aplikacije da se iz baze samo iscita prvi sat. 
+(jer satovima upravlja lokalna baza na uredjaju i mozda je vise satova ostavljeno od nekog prethodnog naloga koji je imao
+ful verziju aplikacije, ali ovo i nema mnogo smisla jer jedan korisnik koji instalira aplikaciju, i ako plati ful verziju
+aplikacije, male su sanse da ce napraviti novi nalog na tom uredjaju koji nece imati uplacenu ful verziju)****
+
+Satovi imaju opciju pravljenja checkpointa. Svaki sat ima svoje chepoint-e. Klikom na dugme check idemo na stranicu za 
+pravljenje checkpointa , ..................
 
 
 
@@ -38,5 +49,5 @@ Dalje na pocetnoj stranici mozemo osim menija videti i satove, .........
 
 
 
-
-
+**Trebala bi se i dodati dodatna ogranicenja, npr. da ne sme da unese kor ime od 300 karaktera i lozinku manje od 8,
+da se u bazu ne sme dodati vise od npr. 100 satova, itd. To su sve finese i zahtevaju dodatni posao**
