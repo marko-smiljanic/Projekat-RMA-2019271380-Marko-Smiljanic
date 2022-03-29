@@ -1,5 +1,6 @@
 package com.example.watchaccuracy;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,13 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
@@ -31,9 +31,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni ekran
-    public MojViewModel viewModel;
-    private Korisnik ulogovaniKorisnik;
+    private MojViewModel viewModel;
 
     public FragmentPocetniEkran() {
     }
@@ -60,65 +61,41 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
         LinearLayout l = vv.findViewById(R.id.mainLytPocetniEkran);
         LinearLayout l2 = vv.findViewById(R.id.mainLyt2PocetniEkran);    //treba mi da bih mogao da nadjem dugme u draw data metodi, jer je dugme izvan mainLytPocetniEkran layouta!!!
 
-        //ulogovaniKorisnik = null;    //na pocetku uvek stavimo da je null jer je znamo da li ce se api zahtev dobro izvrsiti i da li ce u njemu biti korisnik
-        //String korisnickoIme = LokalnoCuvanjeSharedPreferences.ucitajUlogovanogKorisnika(getActivity());
-//        String ulogovan = LokalnoCuvanjeSharedPreferences.ucitajDaLiJeUlogovan(getActivity());
+        //TODO: zbog cega mi ne radi dugme kad prvi put pokrenem aplikaciju?
+        //TODO: zbog cega ne radi poziv set ulogovani?
+        // rucno dohvatam podatke da bi mi prvi prikaz (pri prvom otvaranju aplikacije) bio odgovarajuci (azuriran)
 
-//        if (korisnickoIme.equals("")) {      //cisto za svaki slucja provera ali ako sam menjao vrednosti u shared preferences kad god je trebalo onda nece biti problema nikakvih
-//            System.out.println("GRESKA");
-//            return null;
-//        }
-//        if(ulogovan.equals("nije")){
-//            System.out.println("GRESKA");
-//            return null;
-//        }
 
-//        ulogovaniKorisnik = new Korisnik();
-//        dohvatiUlogovanogKorisnika(korisnickoIme);                //prosledjujemo korisnicko ime iz shared preferemces i radiumo api zahtev i time bi trebalo da setujemo atribut ulogovani korisnik
-//
-//        if(ulogovaniKorisnik == null){
-//            System.out.println("GRESKA");
-//            return null;
-//        }
+        //viewModel.setSatovi();          //rucno i ovde pozivam za svaki slucaj
+        viewModel.setUlogovani();
 
-        //viewModel.setUlogovani();
-
-        //get korisnik prosledjeno korisnicko ime iz shared preferences, a draw data prosledjeno isto korisnicko ime samo sam morao da iskoristim objekat koji je izmenjen u view modelu
-        viewModel.setUlogovani();  //rucno dohvatam podatke da bi mi prvi prikaz (pri prvom otvaranju aplikacije) bio odgovarajuci (azuriran)
-
-        viewModel.getKorisnik().observe(getViewLifecycleOwner(), new Observer<Korisnik>() {     //kad god se azurira korisnik treba pozvati funkciju draw data
+        viewModel.getUlogovani().observe(getViewLifecycleOwner(), new Observer<Korisnik>() {     //kad god se azurira korisnik treba pozvati funkciju draw data
             @Override
             public void onChanged(Korisnik korisnik) {
-                drawData(l, korisnik, l2);
+                iscrtajDugmeDodajSat(korisnik, l2);        //korisnik mi treba za proveru da li je platio ful verziju app da znamo da li da mu zaista omogucimo tu funkcionalnost, iscrtavanja treba razdvojiti u razlicite observer-e
             }
         });
 
-        //TODO: observe treba odraditi i za iscrtavanje satova
+        viewModel.getSatovi().observe(getViewLifecycleOwner(), new Observer<ArrayList<Sat>>() {
+            @Override
+            public void onChanged(ArrayList<Sat> satovi) {
+                iscrtajSatove(l, satovi);                           //ici ce u observe za satove
+            }
+        });
+        //Odradio sam iscrtavanje opcija menija. To je odradjeno u posebnoj metodi menija koja se redefinise i u onCreate fragmenta omogucimo njeno pozivanje
+        //napravljena baza za satove i checkpoint-e
+        //TODO: ostalo mi je da odradim na klijentu satove i njihovo prikazivanje i pravljenje checkpoint-a
+        //ogranicenje koje moram imati kod kreiranja satova je: ako nije platio ful verziju setujem on click listener na neki toast koji ga obavestava (u pitanju je dugme dodaj novi sat)
+        //a ako je platio ful verziju setujem funkcionalnost dodavanja sata
+        //observe treba odraditi i za iscrtavanje satova
         //drawData(l, korisnickoIme, l2);  //treba dodati kad gode skorisnik azuririra ili baza da se iscrta odma ponovo
 
         return vv;
     }
 
-    private void drawData(ViewGroup container, Korisnik korisnik, LinearLayout l2) {
-        //Odradio sam iscrtavanje opcija menija. To je odradjeno u posebnoj metodi menija koja se redefinise i u onCreate fragmenta omogucimo njeno pozivanje
-
-        //napravljena baza za satove i checkpoint-e
-        //TODO: ostalo mi je da odradim na klijentu satove i njihovo prikazivanje i pravljenje checkpoint-a
-        //TODO: ogranicenje koje moram imati kod kreiranja satova je: ako nije platio ful verziju setujem on click listener na neki toast koji ga obavestava (u pitanju je dugme dodaj novi sat), bukvalno prekopiram api kod iz fragmenta nalog
-        //TODO: ako je platio ful verziju setujem funkcionalnost dodavanja sata
-
-        container.removeAllViews();
-
-        LayoutInflater inf = getLayoutInflater();
-        View red = inf.inflate(R.layout.layout_sat, null);
-        red.findViewById(R.id.layoutSatRed);
-
-        Button izmeniSat = red.findViewById(R.id.dugmeIzmeniSat);
-        Button obrisiSat = red.findViewById(R.id.dugmeObrisiSat);
-        TextView labelaPoslednjiCheck = red.findViewById(R.id.labelaPoslednjiCheck);
-
-
-        Button dodajSat = l2.findViewById(R.id.dugmeDodajNoviSat);                //dohvatanje dugmeta koje je u drugom layout-u
+    //TODO: iz nekog razloga ovo se ne izvrsi kad se pokrene aplikacija prvi put, observe se izvrsi i api zahtev, ali se ne prikaze nista
+    private void iscrtajDugmeDodajSat(Korisnik korisnik, LinearLayout ll) {
+        Button dodajSat = ll.findViewById(R.id.dugmeDodajNoviSat);                //dohvatanje dugmeta koje je u drugom layout-u
         if(korisnik.isPlatioFulVerzijuAplikacije() == false){
             dodajSat.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,21 +107,67 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
             dodajSat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //nesto drugo radim ovde, dodavanje sata u bazu ili prelazak na fragment dodavanje
-                    Toast.makeText(getActivity().getApplicationContext(), "RADI", Toast.LENGTH_SHORT).show();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragmentView, FragmentFormaDodajSat.newInstance(), "fragmentDodajSat");
+                    ft.addToBackStack("fragmentDodajSat");  //u ovom slucaju mi ovo ne treba
+                    ft.commit();
                 }
             });
         }
+    }
 
+    //TODO: treba mi ovde ogranicenje da se prikaze samo jedan sat iz baze ako korisnik nema uplacenu ful verziju aplikacije
+    //TODO: ne znam kako to da odradim jer su u pitanju dva razlicita observe-a
+    //TODO: NAJJEDNOSTAVNIJE RESENJE JE DA UNUTAR ISCRTAVANJA SATOVA POZOVEM API ZAHTEV I DOHVATIM KORISNIKA I DA TU UVEDEM
+    //TODO: OGRANICENJE U PRIKAZU
+    private void iscrtajSatove(ViewGroup container, ArrayList<Sat> lista){
+        container.removeAllViews();
 
+        LayoutInflater inf = getLayoutInflater();
+        for (Sat ss : lista){
 
+            View red = inf.inflate(R.layout.layout_sat, null);
+            red.findViewById(R.id.layoutSatRed);
+            TextView labelaMarka = red.findViewById(R.id.labelaMarkaSat);
+            TextView labelaModel = red.findViewById(R.id.labelaModelSat);
+            TextView labelaPoslednjiCheck = red.findViewById(R.id.labelaPoslednjiCheck);
+            Button izmeniSat = red.findViewById(R.id.dugmeIzmeniSat);
+            Button obrisiSat = red.findViewById(R.id.dugmeObrisiSat);
 
+            labelaMarka.setText(ss.getMarka());
+            labelaModel.setText(ss.getModel());
 
+            izmeniSat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewModel.setJedanSelektovanSat(ss);
 
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragmentView, FragmentFormaIzmeniSat.newInstance(), "fragmentIzmeniSat");
+                    ft.addToBackStack("fragmentIzmeniSat");  //u ovom slucaju mi ovo ne treba
+                    ft.commit();
+                }
+            });
 
+            obrisiSat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Baza baza = new Baza(getActivity());
+                    SQLiteDatabase db = baza.getWritableDatabase();
+                    baza.onCreate(db);
 
+                    BazaSat bazaSat = new BazaSat(baza);
+                    bazaSat.deleteSat(ss.getId());
+                    db.close();
 
-        container.addView(red);
+                    viewModel.setSatovi();
+                }
+            });
+
+            container.addView(red);
+        }
     }
 
     @Override
@@ -183,59 +206,6 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                 return super.onOptionsItemSelected(item);  //false
         }
     }
-
-    private void dohvatiUlogovanogKorisnika(String korisnickoIme) {  //ovo je samo api zahtev. Setuje atribut ulogovani korisnik, jer nam treba platio ful verziju aplikacije
-        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        queue.getCache().clear();
-        String url = "http://192.168.0.32:5000/dobaviJednogKorisnika/" + korisnickoIme;
-        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-                if (response.equals("greska")) {
-                    return;
-                }
-
-                try {
-                    JSONObject jsonKorisnik = new JSONObject(response);
-                    Korisnik kk = new Korisnik();
-
-                    if (jsonKorisnik.has("korisnicko_ime")) {
-                        kk.setKorisnickoIme(jsonKorisnik.getString("korisnicko_ime"));
-                    }
-                    if (jsonKorisnik.has("lozinka")) {
-                        kk.setLozinka(jsonKorisnik.getString("lozinka"));
-                    }
-                    if (jsonKorisnik.has("email")) {
-                        kk.setEmail(jsonKorisnik.getString("email"));
-                    }
-                    if (jsonKorisnik.has("platio_ful_verziju")) {
-                        boolean platio;
-                        if (jsonKorisnik.getString("platio_ful_verziju").equals("true")) {
-                            platio = true;
-                        } else {
-                            platio = false;
-                        }
-                        kk.setPlatioFulVerzijuAplikacije(platio);
-                    }
-                    ulogovaniKorisnik = kk;  // // // //
-                } catch (JSONException e) {
-                    System.out.println("Greska prilikom konvertovanja u JSON tip podataka");
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-        queue.add(request);
-    }
-
-
-
-
 
 
 

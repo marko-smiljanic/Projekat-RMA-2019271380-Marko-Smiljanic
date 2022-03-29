@@ -9,19 +9,19 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="641dp">
+        android:layout_height="629dp">
 
         <LinearLayout
             android:id="@+id/mainLytPocetniEkran"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" />
     </ScrollView>
 
     <Button
         android:id="@+id/dugmeDodajNoviSat"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:text="Dodaj sat" />
+        android:layout_height="71dp"
+        android:text="Dodaj novi sat" />
 
 </LinearLayout>

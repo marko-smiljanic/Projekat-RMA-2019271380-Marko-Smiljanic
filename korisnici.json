@@ -21,12 +21,12 @@
     "korisnicko_ime": "korisnik4",
     "lozinka": "lozinka4",
     "email": "email4",
-    "platio_ful_verziju": "false"
+    "platio_ful_verziju": "true"
   },
   {
-    "korisnicko_ime": "test",
-    "lozinka": "test",
-    "email": "test@test",
+    "korisnicko_ime": "sasa",
+    "lozinka": "sasa",
+    "email": "email4",
     "platio_ful_verziju": "false"
   }
 ]

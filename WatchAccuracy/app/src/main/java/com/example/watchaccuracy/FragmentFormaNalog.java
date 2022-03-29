@@ -24,11 +24,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class FragmentFormaNalog extends Fragment {
-    private MojViewModel mojViewModel;
+    private MojViewModel viewModel;
     private String kliknutoDugme;
     private String ulogovan;
 
@@ -46,20 +48,7 @@ public class FragmentFormaNalog extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mojViewModel = new ViewModelProvider(requireActivity(), new ViewModelProvider.Factory() {
-            @NonNull
-            @Override
-            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                try{
-                    return modelClass.newInstance();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (java.lang.InstantiationException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }).get(MojViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(MojViewModel.class);
     }
 
     @Override
@@ -132,8 +121,11 @@ public class FragmentFormaNalog extends Fragment {
                                 Toast.makeText(getActivity().getApplicationContext(), "Nalog sa ovom email adresom vec postoji!", Toast.LENGTH_LONG).show();
                                 return;
                             }else if(response.equals("sve ok")){
+
                                 LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getActivity(), "jeste");                        //cuvamo status da je ulogovan
                                 LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getActivity(), inputKorIme.getText().toString());      //cuvamo korisnicko ime ulogovanog korisnika
+
+                                viewModel.setUlogovani();        //obavezno azuriramo izmene u view modelu
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
@@ -156,7 +148,6 @@ public class FragmentFormaNalog extends Fragment {
                             //proveru za ispravnost formata unetih polja sam odradio gore izvan slanja zahteva
 
                             params.put("korisnicko_ime", inputKorIme.getText().toString());
-                            //System.out.println(inputKorIme.getText().toString());
                             params.put("lozinka", inputLozinka.getText().toString());
                             params.put("email", inputEmail.getText().toString());
                             params.put("platio_ful_verziju", "false"); //kada kreira nalog po default-u stavljamo da nije platio ful verziju
@@ -218,6 +209,8 @@ public class FragmentFormaNalog extends Fragment {
                             }else if(response.equals("sve ok")){
                                 LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getActivity(), "jeste");                        //cuvamo status da je ulogovan
                                 LokalnoCuvanjeSharedPreferences.sacuvajUlogovanogKorisnika(getActivity(), inputKorIme.getText().toString());      //cuvamo korisnicko ime ulogovanog korisnika
+
+                                viewModel.setUlogovani();        //obavezno azuriramo izmene u view modelu
 
                                 FragmentManager fm = getActivity().getSupportFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();

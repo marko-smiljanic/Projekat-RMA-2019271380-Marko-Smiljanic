@@ -1,6 +1,7 @@
 package com.example.watchaccuracy;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,13 +24,14 @@ import java.util.ArrayList;
 public class MojViewModel extends AndroidViewModel {               //da bih mogao da dobavim kontekst
     private MutableLiveData<Korisnik> ulogovaniKorisnik;
     private MutableLiveData<ArrayList<Sat>> satovi;
+    private MutableLiveData<Sat> jedanSelektovaniSat;
     ///////////////
 
     public MojViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<Korisnik> getKorisnik(){  //ako je null onda ga instanciraj i pozovi njegov seter
+    public LiveData<Korisnik> getUlogovani(){  //ako je null onda ga instanciraj i pozovi njegov seter
         if(ulogovaniKorisnik == null){
             ulogovaniKorisnik = new MutableLiveData<>();
             setUlogovani();
@@ -38,11 +40,13 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
     }
 
     private void setujPolje(Korisnik kk){    //sluzi da bih unutar zahteva imao ulogovanog korisnika
+        this.ulogovaniKorisnik = new MutableLiveData<>();
         this.ulogovaniKorisnik.setValue(kk);
     }
 
-    public void setUlogovani(){
+    public void setUlogovani(){   //api zahtev koji dohvata ulogovanog korisnika sa prosledjenim kor imenom (iz shared preferences) i setovanje atributa ulogovani u view modelu
         String korisnickoIme = LokalnoCuvanjeSharedPreferences.ucitajUlogovanogKorisnika(getApplication().getApplicationContext());
+
         RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
         queue.getCache().clear();
         String url = "http://192.168.0.32:5000/dobaviJednogKorisnika/" + korisnickoIme;
@@ -76,6 +80,7 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
                         }
                         kk.setPlatioFulVerzijuAplikacije(platio);
                     }
+
                     setujPolje(kk);   //***********moram ovako da setujem ulogovanog korisnika jer ne mogu da odavde pristupam njemu sa this jer unutar request-a!!!
                 } catch (JSONException e) {
                     System.out.println("Greska prilikom konvertovanja u JSON tip podataka");
@@ -93,6 +98,7 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
         //this.ulogovaniKorisnik.setValue(privremeni);  //ovo smora da se odradi unutar response-a i da mu setujem objekat korisnik koji sam napravio od parametara iz response-a
     }
 
+    //parametar korisnik kk mi sluzi da bih ga u fragmentu pocetni ekran preneo u funkciju koja ovo observe-uje
     public LiveData<ArrayList<Sat>> getSatovi(){  //ako je null onda ga instanciraj i pozovi njegov seter
         if(satovi == null){
             satovi = new MutableLiveData<>();
@@ -101,8 +107,27 @@ public class MojViewModel extends AndroidViewModel {               //da bih moga
         return satovi;
     }
 
-    public void setSatovi(){
-        // .... citanje iz baze
+    public void setSatovi(){                //dodavanje satova iz baze i setovanje atributa view modela
+        Baza baza = new Baza(getApplication().getApplicationContext());
+        SQLiteDatabase db = baza.getWritableDatabase();
+        baza.onCreate(db);
+
+        BazaSat bazaSat = new BazaSat(baza);
+
+        ArrayList<Sat> lista = new ArrayList<>();
+        lista = bazaSat.getAllSatovi();
+        db.close();
+
+        this.satovi.setValue(lista);
+    }
+
+    public LiveData<Sat> getJedanSelektovaniSat(){
+        return this.jedanSelektovaniSat;
+    }
+
+    public void setJedanSelektovanSat(Sat sat){
+        this.jedanSelektovaniSat = new MutableLiveData<>();        //u android view modelu moram imati deklaracije u setovanju!!!
+        this.jedanSelektovaniSat.setValue(sat);
     }
 
 

@@ -94,16 +94,16 @@ public class FragmentNalog extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         System.out.println(response);
-                        if(response.equals("greska")) {
+                        if (response.equals("greska")) {
                             return;
-                        }else if(response.equals("korisnik je vec platio")) {
+                        } else if (response.equals("korisnik je vec platio")) {
                             Toast.makeText(getActivity().getApplicationContext(), "Korisnik vec ima uplacenu punu verziju aplikacije!", Toast.LENGTH_LONG).show();
                             return;
-                        }else if(response.equals("sve ok")) {
+                        } else if (response.equals("sve ok")) {
                             Toast.makeText(getActivity().getApplicationContext(), "Ful verzija uspesno uplacena!", Toast.LENGTH_LONG).show();
                             platioLabela.setText("Kupljena ful verzija");
                         }
-                        viewModel.setUlogovani();
+                        viewModel.setUlogovani();         //ovde sam pozvao set ponovo, a observe-uje pocetni ekran
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -152,13 +152,13 @@ public class FragmentNalog extends Fragment {
                     }
                     //prikaz
                     korisnickoImeLabela.setText(kk.getKorisnickoIme());
-                    System.out.println(kk.getKorisnickoIme());
                     emailLabela.setText(kk.getEmail());
                     if(kk.isPlatioFulVerzijuAplikacije() == true) {
                         platioLabela.setText("Kupljena ful verzija");
                     }else if(kk.isPlatioFulVerzijuAplikacije() == false) {
                         platioLabela.setText("Nije kupljena ful verzija");
                     }
+                    viewModel.setUlogovani();
                 } catch (JSONException e) {
                     System.out.println("Greska prilikom konvertovanja u JSON tip podataka");
                     e.printStackTrace();

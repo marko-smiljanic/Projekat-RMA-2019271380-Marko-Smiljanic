@@ -10,7 +10,7 @@ public class LokalnoCuvanjeSharedPreferences {                                  
     public final static String SHARED_PREFERENCES_DA_LI_JE_ULOGOVAN = "ulogovanUkljuc";             //jeste/nije
     public final static String SHARED_PREFERENCES_KLIKNUTO_DUGME = "kliknutoDugme";                 //dugme je imamNalog/nemamNalog
     public final static String SHARED_PREFERENCES_ULOGOVANI_KORISNIK = "ulogovaniKorisnik";         //cuvam samo korisnicko ime (na serveru je obezbedjenu da bude jedinstveno), ili ""
-
+    public final static String SHARED_PREFERENCES_DA_LI_IMA_FUL_VERZIJU = "fulVerzija";
 
 
     public static String ucitajDaLiJeUlogovan(Context context){                                     //context je za fragment klasu getActivity(), za view model getApplication()

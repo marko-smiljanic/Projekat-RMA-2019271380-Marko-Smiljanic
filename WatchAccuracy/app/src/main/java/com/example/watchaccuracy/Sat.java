@@ -11,15 +11,16 @@ public class Sat {
     public static final String FIELD_MODEL = "model";
 
 
-    private int satId;
+    private int id;
     private String marka;
     private String model;
     private ArrayList<Checkpoint> listaCheckpointa;      //ne cuvam u bazi sata, ucitava se iz baze checkpointa (pretraga po id-ju sata)
 
 
     public Sat(){}
-    public Sat(int satId, String marka, String model) {
-        this.satId = satId;
+
+    public Sat(int id, String marka, String model) {
+        this.id = id;
         this.marka = marka;
         this.model = model;
         this.listaCheckpointa = null;
@@ -49,15 +50,11 @@ public class Sat {
         this.listaCheckpointa = listaCheckpointa;
     }
 
-    public int getSatId() {
-        return satId;
+    public int getId() {
+        return id;
     }
 
-    public void setSatId(int satId) {
-        this.satId = satId;
+    public void setId(int id) {
+        this.id = id;
     }
-
-
-
-
 }

@@ -3,6 +3,7 @@ package com.example.watchaccuracy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         //kreiranje baze
 //        Baza baza = new Baza(getApplicationContext());
 //        SQLiteDatabase db = baza.getWritableDatabase();
-
-        //baza.onCreate(db);                                                          //onCreate mozemo ostaviti jer u upitu stoji if not exist, tako da necep ponistiti podatke koje imamo
-        //baza.brisiSve(db, 0, 0);
+//
+//        baza.onCreate(db);                                                          //onCreate mozemo ostaviti jer u upitu stoji if not exist, tako da necep ponistiti podatke koje imamo
+        //baza.onUpgrade(db, 0, 0);
         //baza.brisiSve(db);
 
 //        BazaSat bazaSat = new BazaSat(baza);
@@ -129,9 +130,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
+    //TODO: problem koji nije resen: Ako se prvo uloguje korisnik koji ima ful verziju aplikacije i napravi vise satova onda ce
+    //todo: sledeci korisnik koji se bude ulogovao isto imati pristup tim satovima iako nije mozda platio ful verziju aplikacije
+    //TODO: resenje je da se ove dve funkcije spoje u view modelu i da u jednoj funkciji odradim i citanje korisnika i na osnovu
+    //TODO: rezultata citanja korisnika onda odradim citanje iz baze. Ako korisnik nema uplacenu ful verziju ne prikazuj vise od jednog sata
+    //TODO: ili da napravim da se satovi prikazuju u odvojenom fragmentu
 
 }
 

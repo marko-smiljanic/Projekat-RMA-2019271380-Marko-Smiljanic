@@ -21,13 +21,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/labelaMarkaSat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="12dp"
-            android:text="Brend"
+            android:text="Marka"
             android:textColor="#1E1B1B"
             android:textSize="23sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/labelaModel"
+            android:id="@+id/labelaModelSat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -46,7 +46,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/labelaMarkaSat"
             app:layout_constraintVertical_bias="0.2" />
 
         <Button
