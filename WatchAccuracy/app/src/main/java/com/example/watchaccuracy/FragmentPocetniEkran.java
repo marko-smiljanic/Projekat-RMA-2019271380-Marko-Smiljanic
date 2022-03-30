@@ -52,7 +52,7 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
 
         viewModel = new ViewModelProvider(requireActivity()).get(MojViewModel.class);
 
-        setHasOptionsMenu(true);                                    //ovo moram da dodam da bih pozvao kreiranje menija
+        setHasOptionsMenu(true);    //ovo moram da dodam da bih pozvao kreiranje menija
     }
 
     @Override
@@ -61,11 +61,7 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
         LinearLayout l = vv.findViewById(R.id.mainLytPocetniEkran);
         LinearLayout l2 = vv.findViewById(R.id.mainLyt2PocetniEkran);    //treba mi da bih mogao da nadjem dugme u draw data metodi, jer je dugme izvan mainLytPocetniEkran layouta!!!
 
-        //TODO: zbog cega mi ne radi dugme kad prvi put pokrenem aplikaciju?
-        //TODO: zbog cega ne radi poziv set ulogovani?
-        // rucno dohvatam podatke da bi mi prvi prikaz (pri prvom otvaranju aplikacije) bio odgovarajuci (azuriran)
-
-        //viewModel.setSatovi();          //rucno i ovde pozivam za svaki slucaj
+        //viewModel.setSatovi();          //nije potrebno ovo rucno raditi
         //viewModel.setUlogovani();
 
         viewModel.getUlogovani().observe(getViewLifecycleOwner(), new Observer<Korisnik>() {     //kad god se azurira korisnik treba pozvati funkciju draw data
@@ -116,10 +112,10 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
         }
     }
 
-    //TODO: treba mi ovde ogranicenje da se prikaze samo jedan sat iz baze ako korisnik nema uplacenu ful verziju aplikacije
-    //TODO: ne znam kako to da odradim jer su u pitanju dva razlicita observe-a
-    //TODO: NAJJEDNOSTAVNIJE RESENJE JE DA UNUTAR ISCRTAVANJA SATOVA POZOVEM API ZAHTEV I DOHVATIM KORISNIKA I DA TU UVEDEM
-    //TODO: OGRANICENJE U PRIKAZU
+    //treba mi ovde ogranicenje da se prikaze samo jedan sat iz baze ako korisnik nema uplacenu ful verziju aplikacije
+    //ne znam kako to da odradim jer su u pitanju dva razlicita observe-a
+    //NAJJEDNOSTAVNIJE RESENJE JE DA UNUTAR ISCRTAVANJA SATOVA POZOVEM API ZAHTEV I DOHVATIM KORISNIKA I DA TU UVEDEM
+    //OGRANICENJE U PRIKAZU
     private void iscrtajSatove(ViewGroup container, ArrayList<Sat> lista){
         container.removeAllViews();
 
@@ -133,6 +129,10 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
             TextView labelaPoslednjiCheck = red.findViewById(R.id.labelaPoslednjiCheck);
             Button izmeniSat = red.findViewById(R.id.dugmeIzmeniSat);
             Button obrisiSat = red.findViewById(R.id.dugmeObrisiSat);
+            Button dugmeCheck = red.findViewById(R.id.buttonCheck);
+
+            //TODO: odraditi da se na klik necega otvori fragment sa njegovim checkpoint-ima
+            //TODO: odraditi sa set jedan selektovani i fragment koji to observe-uje
 
             labelaMarka.setText(ss.getMarka());
             labelaModel.setText(ss.getModel());
@@ -145,11 +145,10 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
                     ft.replace(R.id.fragmentView, FragmentFormaIzmeniSat.newInstance(), "fragmentIzmeniSat");
-                    ft.addToBackStack("fragmentIzmeniSat");  //u ovom slucaju mi ovo ne treba
+                    ft.addToBackStack("fragmentIzmeniSat");
                     ft.commit();
                 }
             });
-
             obrisiSat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -162,6 +161,20 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                     db.close();
 
                     viewModel.setSatovi();
+                }
+            });
+            dugmeCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewModel.setJedanSelektovanSat(ss);
+
+                    System.out.println("aaaaaaaaaaAAAAAAAAAAAAAAaaaaaaaaaaaAAAAAAAAAAaaaaaaaaa   " + ss.getId());
+
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragmentView, FragmentCheckpoint.newInstance(), "fragmentCheckpoint");
+                    ft.addToBackStack("fragmentCheckpoint");
+                    ft.commit();
                 }
             });
 
@@ -202,11 +215,9 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                 Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se odjavili!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);  //false
+                return super.onOptionsItemSelected(item);  //ovo vraca false
         }
     }
-
-
 
 
 }

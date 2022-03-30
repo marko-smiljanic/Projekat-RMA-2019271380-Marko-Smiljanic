@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         //****************TABELA CHECKPOINTI
 
         //DODAVANJE, RADI!!!
-//        bazaCheckpoint.addCheckpoint("2021-7-17 23:14:58", "2021-7-17 23:14:58", "2021-7-17 23:14:58",
-//                "2021-7-17 23:14:58", "2021-7-17 23:14:58", "2021-7-17 23:14:58", "2021-7-17 23:14:58",
-//                "Neki opisssssssssssssssssss", 1);
+//        bazaCheckpoint.addCheckpoint("2021-7-17 23:14:58", "2021-7-17 23:14:58", null,
+//                "2021-7-17 23:14:58", null, "2021-7-17 23:14:58", "2021-7-17 23:14:58",
+//                "Neki opisssssssssssssssssss", 5);
 
         //IZMENA, RADI!!!
 //        bazaCheckpoint.editCheckpoint(1, "2021-7-17 23:14:58", "2021-7-17 23:14:58", "2021-7-17 23:14:58",

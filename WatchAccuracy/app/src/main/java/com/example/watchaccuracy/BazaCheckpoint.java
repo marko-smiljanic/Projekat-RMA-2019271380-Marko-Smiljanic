@@ -86,7 +86,7 @@ public class BazaCheckpoint {
             //sat id ne moram da dohvatam jer ga imam prosledjenog funkciji
 
             Checkpoint cc = new Checkpoint(checkpointId, prvoVremeSistemsko, prvoVremeNaSatu, prvoOdstupanje, drugoVremeSistemsko,
-                                            drugoOdstupanje, drugoNaSatu, konacnoOdstupanje, opis, satId);
+                                        drugoNaSatu, drugoOdstupanje, konacnoOdstupanje, opis, satId);
             list.add(cc);
             result.moveToNext();
         }
