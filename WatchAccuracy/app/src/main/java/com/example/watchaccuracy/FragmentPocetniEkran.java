@@ -131,8 +131,22 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
             Button obrisiSat = red.findViewById(R.id.dugmeObrisiSat);
             Button dugmeCheck = red.findViewById(R.id.buttonCheck);
 
-            //TODO: odraditi da se na klik necega otvori fragment sa njegovim checkpoint-ima
-            //TODO: odraditi sa set jedan selektovani i fragment koji to observe-uje
+            Baza baza = new Baza(getActivity());
+            SQLiteDatabase db = baza.getWritableDatabase();
+            baza.onCreate(db);
+            BazaCheckpoint bazaCheckpoint = new BazaCheckpoint(baza);
+
+            ArrayList<Checkpoint> listaCheckpointa = new ArrayList<>();
+            listaCheckpointa = bazaCheckpoint.getAllCheckpointi(ss.getId());
+            db.close();
+            if(listaCheckpointa.size() >= 1){       //dohvatim poslednjeg, ako on nema konacno odstupanje vidim da li ima onaj pre njega i tu stajem
+                Checkpoint cc = listaCheckpointa.get(listaCheckpointa.size() - 1);
+                if(cc != null){
+                    if(cc.getKonacnoOdstupanje() != null){
+                        labelaPoslednjiCheck.setText(cc.getKonacnoOdstupanje() + "s");
+                    }
+                }
+            }
 
             labelaMarka.setText(ss.getMarka());
             labelaModel.setText(ss.getModel());
@@ -157,6 +171,10 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                     baza.onCreate(db);
 
                     BazaSat bazaSat = new BazaSat(baza);
+                    BazaCheckpoint bazaCheckpoint = new BazaCheckpoint(baza);
+
+                    //delete vraca int ali mi apsolutno nije bitno gde cu smestiti to sto vrati, bitno je da se izvrsi ono unutar upita
+                    bazaCheckpoint.brisiSve(ss.getId());  //prov obrisemo sve njegove checkpointe, tek onda sat
                     bazaSat.deleteSat(ss.getId());
                     db.close();
 
@@ -168,7 +186,7 @@ public class FragmentPocetniEkran extends Fragment {  //ovo je u stvari pocetni 
                 public void onClick(View view) {
                     viewModel.setJedanSelektovanSat(ss);
 
-                    System.out.println("aaaaaaaaaaAAAAAAAAAAAAAAaaaaaaaaaaaAAAAAAAAAAaaaaaaaaa   " + ss.getId());
+                    //System.out.println("aaaaaaaaaaAAAAAAAAAAAAAAaaaaaaaaaaaAAAAAAAAAAaaaaaaaaa   " + ss.getId());
 
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();

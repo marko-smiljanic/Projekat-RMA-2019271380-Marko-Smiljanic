@@ -3,6 +3,7 @@ package com.example.watchaccuracy;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -201,11 +203,14 @@ public class FragmentCheckpoint extends Fragment {
             TextView labelaDrugiCheckVreme = red.findViewById(R.id.labelaDrugiCheck);
             TextView labelaKonacnoOdstupanje = red.findViewById(R.id.labelaOdstupanje);
             ImageView slikaObrisi = red.findViewById(R.id.slikaObrisiCheckpoint);
+            ConstraintLayout layoutZaObojiti = red.findViewById(R.id.redZaObojiti);
 
             labelaPrviCheckVreme.setText(cc.getPrvoVremeSistemsko());   //ovo ne bi trebalo biti null nikad
 
-            if(cc.getDrugoVremeSistemsko() == null){
-                labelaDrugiCheckVreme.setText("");
+            if(cc.getDrugoVremeSistemsko() == null){              //mogao sam ovo isto da odradim i za proveru konacnog odstupanja, svejedno ispadne
+                labelaDrugiCheckVreme.setText("Drugi check odraditi posle 6 sati!");
+                labelaDrugiCheckVreme.setTextColor(Color.parseColor("#FFAC0606"));  //stara boja: #FFAC0606
+                layoutZaObojiti.setBackgroundColor(Color.parseColor("#4DD55656"));   //stara boja: #4DD55656
             }else{
                 labelaDrugiCheckVreme.setText(cc.getDrugoVremeSistemsko());
             }

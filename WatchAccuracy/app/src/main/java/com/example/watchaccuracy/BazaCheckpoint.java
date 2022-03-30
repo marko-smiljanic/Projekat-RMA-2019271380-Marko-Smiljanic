@@ -100,6 +100,14 @@ public class BazaCheckpoint {
         db.execSQL(query);
     }
 
+    public int brisiSve(int satId) {                                   //kad brisem sat onda pozovem i brisanje svih njegovih checkpoint-a
+        int numDeleted = 0;
+        SQLiteDatabase db = baza.getWritableDatabase();
+
+        numDeleted = db.delete(Checkpoint.TABLE_NAME, Checkpoint.FIELD_SAT_ID + "=?", new String[] {String.valueOf(satId)});
+        return numDeleted;
+    }
+
 
 
 

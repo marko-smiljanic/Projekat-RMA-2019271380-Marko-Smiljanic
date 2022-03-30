@@ -37,17 +37,14 @@ Opcija dodavanje sata je omogucena samo nalozima koji imaju uplaceno ful verziju
 ful verziju aplikacije, ali ovo i nema mnogo smisla jer jedan korisnik koji instalira aplikaciju, i ako plati ful verziju
 aplikacije, male su sanse da ce napraviti novi nalog na tom uredjaju koji nece imati uplacenu ful verziju)****
 
-Satovi imaju opciju pravljenja checkpointa. Svaki sat ima svoje chepoint-e. Klikom na dugme check idemo na stranicu za 
-pravljenje checkpointa , ..................
+Satovi imaju opciju pravljenja checkpointa. Svaki sat ima svoje checkpoint-e. Klikom na dugme check idemo na stranicu za 
+pravljenje i prikaz checkpointa. Checkpoint-ima upravlja baza. Checkpointi se prikazuju samo za selektovani sat.
+Azuriran je prikaz poslednjeg checkpointa u prikazu satova na pocetnom ekranu. 
+
+Detaljnije u specifikaciji.
 
 
 
 
 
 
-
-
-
-
-**Trebala bi se i dodati dodatna ogranicenja, npr. da ne sme da unese kor ime od 300 karaktera i lozinku manje od 8,
-da se u bazu ne sme dodati vise od npr. 100 satova, itd. To su sve finese i zahtevaju dodatni posao**

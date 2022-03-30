@@ -93,14 +93,14 @@ public class FragmentNalog extends Fragment {
                 StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        //System.out.println(response);
                         if (response.equals("greska")) {
                             return;
                         } else if (response.equals("korisnik je vec platio")) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Korisnik vec ima uplacenu punu verziju aplikacije!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Korisnik vec ima uplacenu punu verziju aplikacije!", Toast.LENGTH_SHORT).show();
                             return;
                         } else if (response.equals("sve ok")) {
-                            Toast.makeText(getActivity().getApplicationContext(), "Ful verzija uspesno uplacena!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Ful verzija uspesno uplacena!", Toast.LENGTH_SHORT).show();
                             platioLabela.setText("Kupljena ful verzija");
                         }
                         viewModel.setUlogovani();         //ovde sam pozvao set ponovo, a observe-uje pocetni ekran
@@ -123,7 +123,7 @@ public class FragmentNalog extends Fragment {
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+                //System.out.println(response);
                 if(response.equals("greska")) {
                     return;
                 }

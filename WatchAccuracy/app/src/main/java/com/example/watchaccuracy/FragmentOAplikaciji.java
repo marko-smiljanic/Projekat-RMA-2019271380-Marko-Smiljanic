@@ -44,9 +44,12 @@ public class FragmentOAplikaciji extends Fragment {
                 "na servisu da casovnicar moze lakse da vodi evidenciju pri stelovanju odstupanja sata. " +
                 "Ukoliko ne posedujete timegrapher ili neki drugi moderni uredjaj za pracenje odstupanja mehanickih satova ovakva " +
                 "aplikaciija je verovatno najbolje moguce resenje. Samo merenje odstupanja radi tako sto prati izmereno vreme izmedju dva " +
-                "checkpoint-a i uporedjuje sa srednje atomskim vremenom. Veoma je bitno da izmedju dva checkpoint-a prodje dovoljno " +
+                "checkpoint-a i uporedjuje sa srednje atomskim vremenom koje se sinhronizuje sa vaseg uredjaja. " +
+                "Veoma je bitno da izmedju dva checkpoint-a prodje dovoljno " +
                 "vremena (minimum 6 sati) da bi rezultat bio sigurniji. Odstupanje na satu u odredjenom vremenu se uporedjuje sa odstupanjem " +
-                "iz srednje atomskog sata (sistemskog sata uredjaja) i na osnovu toga vidimo rezultat.");
+                "iz srednje atomskog sata (sistemskog sata uredjaja) i na osnovu toga vidimo rezultat. " +
+                "Za najsigurniji rezultat trena sat meriti u situacijama kada je skroz navijen ili kada je malo navijen. " +
+                "Treba takodje ostavljati sat i u razlicitim polozajima preko noci da bi se pokazao rad mehanizma u razlicitim uslovima.");
 
     }
 

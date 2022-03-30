@@ -93,12 +93,12 @@ public class FragmentFormaNalog extends Fragment {
                     return;                                                                         //ako je ulogovan necemo praviti nalog
                 }else if(ulogovan.equals("nije")){
                     while(inputKorIme.getText().toString().equals("") || inputLozinka.getText().toString().equals("") || inputEmail.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Sva polja su obavezna!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Sva polja su obavezna!", Toast.LENGTH_SHORT).show();
                         return;                                                                     //prekidamo izvrsavanje onclick-a i beskonacne while petlje
                     }
                     //iz nekog razloga ako se odradi split na  "@ada" (tj. pre @ nista) on iz nekog razloga posmatra kao da je razdelio na 2 elementa, necu ovaj izuzetak obraditi, nije bitno toliko
                     while((inputEmail.getText().toString()).split("@").length <= 1){                         //kad rastavimo string email po "@" i on ne vrati nista znaci nema @, ako ne vrati niz koji ima npr. 2 kraja nesto@nesto2 onda je pokusao da unese nesto@ ili @nesto i tu ga secemo, e sad ovde je problem jer ako je uneto @nesto on prepoznaje da je to niz od dva elementa jer se pre @ podrazumeva da stoji "
-                        Toast.makeText(getActivity().getApplicationContext(), "Email adresa u neispravnom formatu!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Email adresa u neispravnom formatu!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     //Kada se uspesno odradi post zahtev sada se mozemo prebaciti na korisnikov nalog, tj. na neki pocetni ekran aplikacije
@@ -113,12 +113,12 @@ public class FragmentFormaNalog extends Fragment {
                     StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            System.out.println(response);
+                            //System.out.println(response);
                             if(response.equals("korisnicko ime vec postoji")){
-                                Toast.makeText(getActivity().getApplicationContext(), "Nalog sa ovim korisnickim imenom vec postoji!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Nalog sa ovim korisnickim imenom vec postoji!", Toast.LENGTH_SHORT).show();
                                 return;
                             }else if(response.equals("email adresa vec postoji")){
-                                Toast.makeText(getActivity().getApplicationContext(), "Nalog sa ovom email adresom vec postoji!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Nalog sa ovom email adresom vec postoji!", Toast.LENGTH_SHORT).show();
                                 return;
                             }else if(response.equals("sve ok")){
 
@@ -133,7 +133,7 @@ public class FragmentFormaNalog extends Fragment {
                                 //ft.addToBackStack("fragmentNalog");  //u ovom slucaju mi ovo ne treba
                                 ft.commit();
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se kreirali nalog!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se kreirali nalog!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -190,7 +190,7 @@ public class FragmentFormaNalog extends Fragment {
                     //kada ovo odradim ostaje da odradim dalje prikaz pocetnog ekrana sa satovima.
 
                     while(inputKorIme.getText().toString().equals("") || inputLozinka.getText().toString().equals("")) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Sva polja su obavezna!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Sva polja su obavezna!", Toast.LENGTH_SHORT).show();
                         return;                                                                     //prekidamo izvrsavanje onclick-a i beskonacne while petlje
                     }
 
@@ -202,9 +202,9 @@ public class FragmentFormaNalog extends Fragment {
                     StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            System.out.println(response);
+                            //System.out.println(response);
                             if(response.equals("neispravan unos")){
-                                Toast.makeText(getActivity().getApplicationContext(), "Pogresan unos korisnickog imena ili lozinke!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Pogresan unos korisnickog imena ili lozinke!", Toast.LENGTH_SHORT).show();
                                 return;
                             }else if(response.equals("sve ok")){
                                 LokalnoCuvanjeSharedPreferences.sacuvajDaLiJeUlogovan(getActivity(), "jeste");                        //cuvamo status da je ulogovan
@@ -218,7 +218,7 @@ public class FragmentFormaNalog extends Fragment {
                                 //ft.addToBackStack("fragmentNalog");  //u ovom slucaju mi ovo ne treba
                                 ft.commit();
 
-                                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se ulogovali", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "Uspesno ste se ulogovali", Toast.LENGTH_SHORT).show();
                             }
 
                         }

@@ -60,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         //dohvatanje jednog, RADI!!!
 //        Sat ss = bazaSat.getOneSat(1);
-//        System.out.println(ss.getMarka());
+//        System.out.println(ss.getId() + " " + ss.getMarka());
 
         //PRIKAZ
 //        System.out.println("U TABELI SATOVI: ");
 //        for (Sat s : lista){
-//            System.out.println(s.getMarka() + " " + s.getModel());
+//            System.out.println(s.getId() + " " + s.getMarka() + " " + s.getModel());
 //        }
 
         //****************TABELA CHECKPOINTI
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         //bazaCheckpoint.deleteCheckpoint(1);
 
         //DOHVATANJE, RADI!!!
-//        ArrayList<Checkpoint> lista2 = bazaCheckpoint.getAllCheckpointi(2);
+//        ArrayList<Checkpoint> lista2 = bazaCheckpoint.getAllCheckpointi(5);
 
         //PRIKAZ
 //        System.out.println("U TABELI CHECKPOINTI: ");
@@ -96,24 +96,16 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
-
-
-
-        //zbog cega su tipovi u bazi checkpoint ubaceni kao numeric kada sam hteo da budu datetime?
-        //za sada nemam problema i sve radi
-        //nasao sam odgovor. sql lite nema datetime tip i zbog toga on meni skladisti kao numericki, to nije bitno jer ja svakako
-        //pretvaram u string i radim sa njim kada citam iz baze
-        //TODO: da li da ipak promenim tip na TEXT?
-
-
-
-
         //prvi (pocenti) fragment se dodaje sa add, ostali se dodaju sa replace, i ako stavimo add to back stack onda se sa prikazanog fragmenta vraca na prethodni
         //main activity treba samo da barata fragmentima i nista drugo
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragmentView, FragmentPrvoPokretanje.newInstance(), "fragmentPrvoPokretanje")
                 .commit();
 
+
+        //zbog cega su tipovi u bazi checkpoint ubaceni kao numeric kada sam hteo da budu datetime?
+        //za sada nemam problema i sve radi
+        //nasao sam odgovor. sql lite nema datetime tip i zbog toga on meni skladisti kao numericki, to nije bitno jer ja svakako
 
         //Kako da omogucim da aplikacija sama na pocetku radi dohvatanje iz api-ja i da sam radi npr. iscitavanje iz shared preferences ako radim sa view modelom
         //imam dva nacina da radim sa fragmentima. Nesto im direktno prosledim i oni sa tim rade (npr. iscrtavaju)
@@ -128,13 +120,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-    //TODO: problem koji nije resen: Ako se prvo uloguje korisnik koji ima ful verziju aplikacije i napravi vise satova onda ce
-    //todo: sledeci korisnik koji se bude ulogovao isto imati pristup tim satovima iako nije mozda platio ful verziju aplikacije
-    //TODO: resenje je da se ove dve funkcije spoje u view modelu i da u jednoj funkciji odradim i citanje korisnika i na osnovu
-    //TODO: rezultata citanja korisnika onda odradim citanje iz baze. Ako korisnik nema uplacenu ful verziju ne prikazuj vise od jednog sata
-    //TODO: ili da napravim da se satovi prikazuju u odvojenom fragmentu
+    //TODO: ostalo je da konacno odstupanje pretvorim u second per day jedinicu (spd)
+    //TODO: prikazati samo jedan sat ako nema ful verziju, tj. ucitati samo jedan iz baze, nzm da li ima smisla
+    //TODO: jer ako je korisnik kupio ful verziju aplikacije zasto bi se sa istog uredjaja ulogovao sa nalogom koji nema kupljenu ful verziju
+    //TODO: izmeniti o aplikaciji
+    //svaki toast u projektu staviti na length short
+    //TODO: trebao sam jos raditi sa senzorom kamere da korisnik moze da slika sat i da moze da postavi tu sliku u prikazu satova
+    //TODO: izmeniti u klasi checkpoint da se id ne zove checkpointId nego samo id, ali tu je vec lanac izmena svuda
+    //TODO: Trebala bi se i dodati dodatna ogranicenja, npr. da ne sme da unese kor ime od 300 karaktera i lozinku manje od 8 karaktera,
+    //TODO: da se u bazu ne sme dodati vise od npr. 100 satova, itd. To su sve finese i zahtevaju dodatni posao
 
 }
 

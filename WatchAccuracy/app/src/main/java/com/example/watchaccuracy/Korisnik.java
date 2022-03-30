@@ -5,7 +5,6 @@ public class Korisnik {
     private String lozinka;
     private String email;
     private boolean platioFulVerzijuAplikacije = false;
-    private boolean dodatPrviSat = false;
 
     public Korisnik() {
     }
@@ -49,11 +48,5 @@ public class Korisnik {
         this.platioFulVerzijuAplikacije = platioFulVerzijuAplikacije;
     }
 
-    public boolean isDodatPrviSat() {
-        return dodatPrviSat;
-    }
 
-    public void setDodatPrviSat(boolean dodatPrviSat) {
-        this.dodatPrviSat = dodatPrviSat;
-    }
 }
