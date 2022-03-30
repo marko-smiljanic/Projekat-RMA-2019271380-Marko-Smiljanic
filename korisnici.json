@@ -28,5 +28,11 @@
     "lozinka": "sasa",
     "email": "email4",
     "platio_ful_verziju": "true"
+  },
+  {
+    "korisnicko_ime": "yyyy",
+    "lozinka": "yyyy",
+    "email": "yyyy@tt",
+    "platio_ful_verziju": "true"
   }
 ]

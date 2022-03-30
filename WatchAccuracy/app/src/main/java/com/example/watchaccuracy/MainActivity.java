@@ -129,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO: izmeniti u klasi checkpoint da se id ne zove checkpointId nego samo id, ali tu je vec lanac izmena svuda
     //TODO: Trebala bi se i dodati dodatna ogranicenja, npr. da ne sme da unese kor ime od 300 karaktera i lozinku manje od 8 karaktera,
     //TODO: da se u bazu ne sme dodati vise od npr. 100 satova, itd. To su sve finese i zahtevaju dodatni posao
+    //TODO: problem je sto sa serverom npr. lozinku razmenjujem kao plain text
+
 
 }
 
