@@ -63,8 +63,6 @@ public class FragmentCheckpoint extends Fragment {
         LinearLayout l = vv.findViewById(R.id.mainLytCheckpoint);
         LinearLayout l2 = vv.findViewById(R.id.mainLytCheckpoint2);
 
-
-
         viewModel.getJedanSelektovaniSat().observe(getViewLifecycleOwner(), new Observer<Sat>() {
             @Override
             public void onChanged(Sat sat) {
@@ -76,6 +74,7 @@ public class FragmentCheckpoint extends Fragment {
         return vv;
     }
 
+
     private void iscrtajDodavanjeCheckpointa(Sat sat, LinearLayout ll, ViewGroup container){
         TextView tv = ll.findViewById(R.id.tv1);
         EditText inputOpis = ll.findViewById(R.id.inputOpisCheckpointa);
@@ -83,22 +82,20 @@ public class FragmentCheckpoint extends Fragment {
 
         //kada korisnik pritisne ovo dugme to znaci da je sekundna kazaljka dosegla 12, i mi prvo treba da uzmemo
         //sistemsko vreme (trenutno tacno) i da sacuvamo. Nakon toga od korisnika trazimo unos tacnog vremena na njegovom
-        //satu da bi smo mogli dalje da pravimo checkpoint
+        //satu da bi smo mogli dalje da pravimo checkpoint (racunamo odstupanja i setujemo u bazu)
         kreirajCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");           //   2022/03/29 23:54:24
-
-
-                sistemskoVreme = new Date();   //dohvata trenutno sistemsko vreme
+                dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");   // 2022/03/29 23:54:24
+                sistemskoVreme = new Date();   //dohvata trenutno sistemsko vreme, vreme kad je kreiran check, odnosno kad je kliknuto na dugme
 
                 TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {  // i je sat, i1 minut
-                        Date d = new Date();        //ponovo uzimamo trenutno vreme, jer razlika izmedju ovog i gore sistemskog vremena su sekunde koje treba da setujemo u vreme koje je na satu
-                        long rezultat = d.getTime() - sistemskoVreme.getTime();
-                        long rezultatUSekundama = (rezultat / (1000)) % 60;
-                        //int sekundaInt = Integer.parseInt(String.valueOf(sekunda));      //TODO: da bi smo znali koje sekunde da setujemo, jer od klika na dugme do odabira vreme isto prodje vreme koje su nam u stvari sekunde, ne verujem da ce neko za vise od minuta potrositi da upise vreme koje vidi na satu, ali moze da se ishendluje
+                    public void onTimeSet(TimePicker timePicker, int i, int i1) {      // i je sat, i1 minut
+                        Date d = new Date();                                           //ponovo uzimamo trenutno vreme
+                        long rezultat = d.getTime() - sistemskoVreme.getTime();        //razlika izmedju ovog i gore sistemskog vremena su sekunde koje treba da setujemo na vreme koje je na satu, jer sekunde se pocinju meriti od klika na dugme do setovanja i potvrde setovanja vremena na satu
+                        long rezultatUSekundama = (rezultat / (1000)) % 60;            //ovo je vreme koje je proso od klika na dugme check do odabira i potvrde odabira vremena na satu
+                        //int sekundaInt = Integer.parseInt(String.valueOf(sekunda));  //TODO: da bi smo znali koje sekunde da setujemo, jer od klika na dugme do odabira vreme isto prodje vreme koje su nam u stvari sekunde, ne verujem da ce neko za vise od minuta potrositi da upise vreme koje vidi na satu, ali moze da se ishendluje
 
                         DateFormat dateFormat3 = new SimpleDateFormat("yyyy/MM/dd");   //odavde mi treba samo datum
                         String datumStr = dateFormat3.format(d);
@@ -106,10 +103,10 @@ public class FragmentCheckpoint extends Fragment {
                         String selektovaniMinutStr = String.valueOf(i1);
                         String sekundeStr = String.valueOf(rezultatUSekundama);
 
-                        //2022/03/29 23:54:24
+                        //2022/03/29 23:54:24, ovkao izgleda vremeStr kada dodam sve potrebne atribute u datom formatu
                         String vremeStr = datumStr + " " + selektovaniSatStr + ":" + selektovaniMinutStr + ":" + sekundeStr;
                         try {
-                            vremeNaSatu = dateFormat.parse(vremeStr);
+                            vremeNaSatu = dateFormat.parse(vremeStr);       //koristimo funkciju parse da dobijemo objekat date, da radimo dalja racunanja
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -134,6 +131,7 @@ public class FragmentCheckpoint extends Fragment {
                         //long razlikaUGodinama = (odstupanje / (1000l * 60 * 60 * 24 * 365));  //ne bi bas trebalo da se checkpoint uradi za godinu dana haha
                         long razlikaUDanima = (odstupanje / (1000 * 60 * 60 * 24)) % 365;
 
+                        //posto odstupanje priakzujem u sekundama, ove razlike u minutima, satima, danima pretvaram u sekunde
                         long razlikaUMinutimaUSekunde = razlikaUMinutima * 60;
                         long razlikaUSatimaUSekunde = razlikaUSatima * 3600;
                         //long razlikaUGodinamaUSekunde = razlikaUGodinama * 31536000;
@@ -164,9 +162,10 @@ public class FragmentCheckpoint extends Fragment {
                             bazaCheckpoint.addCheckpoint(dateFormat.format(sistemskoVreme), dateFormat.format(vremeNaSatu), rezultatUSekundamaStr,
                                     null, null, null, null, null, sat.getId());
                         }
-
                         iscrtajCheckpointe(sat, container);   //posle operacije sa bazom ponovo pozivam iscrtavanje checkpoint-a
                         db.close();
+
+
                     }
                 };
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT ,onTimeSetListener, selektovaniSat, selektovaniMinut, true);
@@ -177,7 +176,6 @@ public class FragmentCheckpoint extends Fragment {
 
             }
         });
-
 
     }
 
@@ -232,8 +230,9 @@ public class FragmentCheckpoint extends Fragment {
         }
         db.close();
 
-
     }
+
+
 
 //    Baza baza = new Baza(getActivity());
 //    SQLiteDatabase db = baza.getWritableDatabase();

@@ -13,11 +13,11 @@
 
         <TextView
             android:id="@+id/tv1"
-            android:layout_width="366dp"
-            android:layout_height="66dp"
+            android:layout_width="400dp"
+            android:layout_height="68dp"
             android:layout_marginTop="4dp"
             android:gravity="center"
-            android:text='Dodirnite dugme "check" kada sekundna kazaljka na vasem satu stane na 12. Zbog preciznosti merenje treba minimum 6 sati izmedju check-ova.'
+            android:text='Dodirnite dugme "check" kada sekundna kazaljka na vasem satu dodje tacno na 12. Potrebno je minimum 6 sati razmaka izmedju dva check-a, kako bi rezultat bio validan.'
             android:textColor="#B84C4C"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

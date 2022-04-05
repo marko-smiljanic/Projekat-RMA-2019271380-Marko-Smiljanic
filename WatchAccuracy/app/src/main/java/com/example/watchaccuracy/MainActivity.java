@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Trebala bi se i dodati dodatna ogranicenja, npr. da ne sme da unese kor ime od 300 karaktera i lozinku manje od 8 karaktera,
     //TODO: da se u bazu ne sme dodati vise od npr. 100 satova, itd. To su sve finese i zahtevaju dodatni posao
     //TODO: problem je sto sa serverom npr. lozinku razmenjujem kao plain text
+    //TODO: da bi smo znali koje sekunde da setujemo (PRI ODABIRU VREMENA NA SATU), jer od klika na dugme CHECK do odabira vreme isto prodje vreme koje su nam u stvari sekunde, ne verujem da ce neko za vise od minuta potrositi da upise vreme koje vidi na satu, ali moze da se ishendluje
+    //TODO: popraviti opis check pointa, da se i on setuje pri kreiranju i da se prikaze u odvojenom ekranu
+
 
 
 }
