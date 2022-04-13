@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
     //TODO: da bi smo znali koje sekunde da setujemo (PRI ODABIRU VREMENA NA SATU), jer od klika na dugme CHECK do odabira vreme isto prodje vreme koje su nam u stvari sekunde, ne verujem da ce neko za vise od minuta potrositi da upise vreme koje vidi na satu, ali moze da se ishendluje
     //TODO: popraviti opis check pointa, da se i on setuje pri kreiranju i da se prikaze u odvojenom ekranu
 
+    //za diplomski
+    //word!!!
+    //istorijat androida, koji problem resava aplikacija? pojasnjenje sa sscreenshot kod (screenshot na emulatoru se radi na crtl + s)
+
 
 
 }
