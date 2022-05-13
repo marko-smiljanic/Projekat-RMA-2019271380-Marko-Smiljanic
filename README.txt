@@ -43,6 +43,11 @@ Azuriran je prikaz poslednjeg checkpointa u prikazu satova na pocetnom ekranu.
 
 Detaljnije u specifikaciji.
 
+****Treba dodati da se odstupanje satova prikaze (preko proporcije) na 24h, a ne ukupno odstupanje kako je sada odradjenja.
+****Treba dodati da se prozor za unosenje vremena na satu u aplikaciju ugasi posle 1 min (jer posle 1 min ne mogu da 
+obradim unosenje sekundi)
+****Treba dodati opomenu da ako korisnik odradi checkpoint ukoliko odradi npr.u razmacima manjim od 6h.
+
 
 
 
